@@ -270,7 +270,7 @@ let g:ctrlp_user_command = {
 \ }
 
 " NerdTree shortcut
-nnoremap <leader>d :NERDTreeToggle<cr>
+nnoremap <leader>d :NERDTreeTabsToggle<cr>
 let NERDTreeIgnore = ['\.pyc$']
 
 " Tabularize {
