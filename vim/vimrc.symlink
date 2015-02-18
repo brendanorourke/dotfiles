@@ -30,9 +30,11 @@ call vundle#rc()
   Bundle 'godlygeek/tabular'
   Bundle "pangloss/vim-javascript"
   Bundle 'scrooloose/nerdtree'
+  Bundle 'jistr/vim-nerdtree-tabs'
   Bundle 'mattn/emmet-vim'
   Bundle 'klen/python-mode.git'
   Bundle 'kchmck/vim-coffee-script'
+  Bundle 'mustache/vim-mustache-handlebars'
 
 " General
 
