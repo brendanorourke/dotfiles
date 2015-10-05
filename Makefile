@@ -6,11 +6,15 @@ vimrc = $(HOME)/.vimrc
 bin_dir = /usr/local/bin
 brew = $(bin_dir)/brew
 tmux = $(bin_dir)/tmux
+zsh = $(bin_dir)/zsh
 
 vimbundles: $(vimrc) $(vundle)
 	vim +BundleInstall! +BundleClean +qall
 
-symlinks: $(dotfiles) $(tmux)
+oh-my-zsh:
+	curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
+
+symlinks: $(dotfiles) $(tmux) oh-my-zsh
 	$(root_dir)/scripts/symlink_dotfiles
 
 $(dotfiles): $(root_dir)
@@ -34,3 +38,10 @@ $(brew):
 $(tmux): $(brew) reattach-to-user-namespace
 	brew install tmux
 
+clean:
+	rm -rf $(HOME)/.vim
+	rm -rf $(HOME)/.oh-my-zsh
+	rm $(HOME)/.vimrc
+	rm $(HOME)/.tmux.conf
+	rm $(HOME)/.zshrc
+	rm $(HOME)/.dotfiles
