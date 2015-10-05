@@ -32,8 +32,9 @@ call vundle#rc()
   Bundle 'scrooloose/nerdtree'
   Bundle 'jistr/vim-nerdtree-tabs'
   Bundle 'mattn/emmet-vim'
-  Bundle 'klen/python-mode.git'
-  Bundle 'kchmck/vim-coffee-script'
+  " Bundle 'klen/python-mode.git'
+  " Bundle 'kchmck/vim-coffee-script'
+  Bundle 'mxw/vim-jsx'
   Bundle 'mustache/vim-mustache-handlebars'
 
 " General
@@ -242,15 +243,17 @@ let delimitMate_smart_quotes = 0
 " Powerline
 let g:Powerline_symbols='fancy'
 
+" React
+let g:jsx_ext_required = 0
 
 " Python-Mode
 " Don't autofold code
-let g:pymode_folding = 0
-let g:pymode_lint_checkers = ['pep8']
-let g:pymode_lint_ignore = ['E111']
-let g:pymode_lint_signs = 0
-let g:pymode_trim_whitespaces = 0
-let g:pymode_lint = 0
+ let g:pymode_folding = 0
+ let g:pymode_lint_checkers = ['pep8']
+ let g:pymode_lint_ignore = ['E111']
+ let g:pymode_lint_signs = 0
+ let g:pymode_trim_whitespaces = 0
+ let g:pymode_lint = 0
 
 " CtrlP
 let g:ctrlp_switch_buffer = 0
