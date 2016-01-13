@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/orourkebm/.oh-my-zsh
+export ZSH=/Users/borourke/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -53,8 +53,6 @@ DEFAULT_USER="borourke"
 plugins=(git)
 
 # User configuration
-
-export PATH="/opt/local/bin:/opt/local/sbin:/Users/orourkebm/optimizely/out/ec2_api_tools/bin:/Users/orourkebm/optimizely/src/www/frontend/node_modules/.bin:/Users/orourkebm/optimizely/out:/Users/orourkebm/optimizely/bin/overrides:/Users/orourkebm/optimizely/bin:/opt/local/bin:/opt/local/sbin:/usr/local/mysql/bin:/Users/orourkebm/optimizely/out/ec2_api_tools/bin:/Users/orourkebm/optimizely/out:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin:/Users/orourkebm/optimizely/bin:/Users/orourkebm/optimizely/bin/overrides:/Users/orourkebm/optimizely/bin:/Users/orourkebm/optimizely/bin/overrides:/Users/orourkebm/optimizely/bin:/Users/orourkebm/optimizely/bin/overrides:/Users/orourkebm/optimizely/bin:/Users/orourkebm/optimizely/bin/overrides:/Users/orourkebm/optimizely/bin:/Users/orourkebm/optimizely/bin/overrides:/Users/orourkebm/optimizely/bin:/Users/orourkebm/optimizely/bin/overrides:/Users/orourkebm/optimizely/bin:/Users/orourkebm/optimizely/bin/overrides"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh

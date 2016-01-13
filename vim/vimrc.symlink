@@ -40,6 +40,7 @@ call vundle#rc()
 " General
   set t_Co=256
   set background=dark         " Assume a dark background
+  set term=xterm-256color
   filetype plugin indent on   " Automatically detect file types.
   syntax on                   " Syntax highlighting
   set mouse=a                 " Automatically enable mouse usage
