@@ -85,4 +85,11 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+makeDirAndChange () {
+  mkdir $1
+  cd $1
+}
+
+alias mkdr="makeDirAndChange"
 alias npmclean="rm -rf ./node_modules && npm cache clean && npm install"
