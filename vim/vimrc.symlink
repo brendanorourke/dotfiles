@@ -19,6 +19,7 @@ call vundle#rc()
   Bundle 'kien/ctrlp.vim'
   Bundle 'Raimondi/delimitMate'
   Bundle 'bling/vim-airline'
+  Bundle 'vim-airline/vim-airline-themes'
   Bundle 'godlygeek/csapprox'
   Bundle 'flazz/vim-colorschemes'
   Bundle 'myusuf3/numbers.vim'
