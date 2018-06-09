@@ -178,13 +178,13 @@ if [[ ! "$(type -P curl)" ]] && is_ubuntu; then
 fi
 
 # Install vim bundles
-e_header "Installing vim bundles..."
+e_header "Installing vim bundles…"
 mkdir -p $(HOME)/.vim/bundle
 git clone http://github.com/gmarik/vundle.git $(HOME)/.vim/bundle/vundle
 vim +BundleInstall! +BundleClean +qall
 
 # Install oh-my-zsh
-e_header "Installing Oh My Zsh..."
+e_header "Installing Oh My Zsh…"
 curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
 
 # Initialize.

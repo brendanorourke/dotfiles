@@ -1,5 +1,5 @@
 # Current user name, to be used in absolute pathing
-DEFAULT_USER="$(id -un)"
+export DEFAULT_USER="$(id -un)"
 
 # Enable 256-colors for terminal theme
 export TERM="xterm-256color"
