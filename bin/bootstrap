@@ -60,55 +60,68 @@ function link_do() {
 # INSTALL SYSTEM REQUIRMENTS
 ###########################################
 
-
+#
 # Ensure that we can actually, like, compile anything.
+#
 if [[ ! "$(type -P gcc)" ]] && is_osx; then
   e_error "XCode or the Command Line Tools for XCode must be installed first."
   exit 1
 fi
 
-# If Git is not installed, install it (Ubuntu only, since Git comes standard
-# with recent XCode or CLT)
-e_header "Installing git…"
+#
+# If Git is not installed, install it
+# Ubuntu only, since Git comes standard with recent XCode or CLT)
+#
 if [[ ! "$(type -P git)" ]] && is_ubuntu; then
-  install_git() {
+  function git_header() { e_header "Installing git…"; }
+
+  function git_install() {
     sudo apt-get -qq install git-core
   }
-  safe_exec install_git "git"
-else
-  e_arrow "git already installed"
+
+  install_stuff "git"
 fi
 
+#
 # If curl is not installed, install it (Ubuntu only, curl standard on macOS)
-e_header "Installing curl…"
+#
 if [[ ! "$(type -P curl)" ]] && is_ubuntu; then
-  install_curl() {
+  function curl_header() { e_header "Installing curl…"; }
+
+  function curl_install() {
     sudo apt-get -qq install curl
   }
-  safe_exec install_curl "curl"
-else
-  e_arrow "curl already installed"
+
+  install_stuff "curl"
 fi
 
+#
 # Install vim bundles
-e_header "Installing vim bundles…"
-install_vim_bundles() {
+#
+function vimbundles_header() { e_header "Installing vim bundles…"; }
+
+function vimbundles_install() {
   mkdir -p ~/.vim/bundle
   if [[ ! -e ~/.vim/bundle/vundle ]]; then
     git clone http://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
   fi
   vim +BundleInstall! +BundleClean +qall 2&> /dev/null
 }
-safe_exec install_vim_bundles "vim"
 
+install_stuff "vimbundles"
+
+#
 # Install oh-my-zsh
-e_header "Installing Oh My Zsh…"
-install_ohmyzsh() {
+#
+function ohmyzsh_header() { e_header "Installing Oh My Zsh…"; }
+
+function ohmyzsh_install() {
   curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh && \
   curl -fsSL http://raw.github.com/caiogondim/bullet-train-oh-my-zsh-theme/master/bullet-train.zsh-theme \
     --output ~/.oh-my-zsh/themes/bullet-train.zsh-theme
 }
-safe_exec install_ohmyzsh "oh-my-zsh"
+
+install_stuff "ohmyzsh"
 
 
 ###########################################

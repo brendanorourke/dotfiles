@@ -158,3 +158,13 @@ function do_stuff() {
     "$1_do" "$base" "$file"
   done
 }
+
+# Copy, link, init, etc.
+# Example: do_stuff "copy"
+#          Will then call copy_header(), copy_test(), and copy_do()
+# Note: the header/test/do functions must be defined in the script
+#       you're calling do_stuff from.
+function install_stuff() {
+  [[ $(declare -f "$1_header") ]] && "$1_header"
+  safe_exec "$1_install" $1
+}
