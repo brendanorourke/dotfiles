@@ -4,13 +4,6 @@ export DEFAULT_USER="$(id -un)"
 # Enable 256-colors for terminal theme
 export TERM="xterm-256color"
 
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-export BULLETTRAIN_TIME_BG="black"
-export BULLETTRAIN_TIME_FG="white"
-export ZSH=/Users/$DEFAULT_USER/.oh-my-zsh
-export ZSH_THEME="bullet-train"
-
 # Sift Science
 export PYTHONPATH="${PYTHONPATH}:$HOME/dev/SE_tools"
 

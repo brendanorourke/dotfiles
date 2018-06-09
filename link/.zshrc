@@ -5,9 +5,21 @@
 plugins=(git)
 
 # User configuration
+DEFAULT_USER="$(id -un)"
+
+# Set name of the theme to load.
+# Look in ~/.oh-my-zsh/themes/
+BULLETTRAIN_TIME_BG="black"
+BULLETTRAIN_TIME_FG="white"
+ZSH=/Users/$DEFAULT_USER/.oh-my-zsh
+ZSH_THEME="bullet-train"
 
 source $ZSH/oh-my-zsh.sh
-source $(brew --prefix nvm)/nvm.sh
+
+# Load Node Version Manager
+# https://github.com/creationix/nvm
+NVM_DIR=~/.nvm
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
 # Where the magic happens.
 export DOTFILES=~/.dotfiles
