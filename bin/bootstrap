@@ -19,11 +19,10 @@ source utils
 
 
 ###########################################
-# INTERNAL DOTFILES "INIT" VARS / FUNCTIONS
+# COPY FILES
 ###########################################
 
 
-# Copy files.
 function copy_header() { e_header "Copying files into home directory…"; }
 
 function copy_test() {
@@ -39,7 +38,12 @@ function copy_do() {
   cp "$2" ~/
 }
 
-# Link files.
+
+###########################################
+# LINK FILES
+###########################################
+
+
 function link_header() { e_header "Linking files into home directory…"; }
 
 function link_test() {
@@ -50,6 +54,12 @@ function link_do() {
   e_success "Linking ~/$1."
   ln -sf "${2#$HOME/}" ~/
 }
+
+
+###########################################
+# INSTALL SYSTEM REQUIRMENTS
+###########################################
+
 
 # Ensure that we can actually, like, compile anything.
 if [[ ! "$(type -P gcc)" ]] && is_osx; then
@@ -100,7 +110,12 @@ install_ohmyzsh() {
 }
 safe_exec install_ohmyzsh "oh-my-zsh"
 
-# Initialize.
+
+###########################################
+# INITIALIZE DOTFILES
+###########################################
+
+
 if [[ ! -d $DOTFILES ]]; then
   e_header "Downloading dotfiles…"
   git clone --recursive git://github.com/$GITHUB_USER/dotfiles.git $DOTFILES
