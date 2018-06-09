@@ -12,7 +12,7 @@ GITHUB_USER="brendanorourke"
 # Where the magic happens.
 export DOTFILES=~/.dotfiles
 
-source utils
+source utils.sh
 
 # If this file was being sourced, exit now.
 [[ "$1" == "source" ]] && return

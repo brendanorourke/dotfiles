@@ -4,7 +4,7 @@ export DEFAULT_USER="$(id -un)"
 # Enable 256-colors for terminal theme
 export TERM="xterm-256color"
 
-# Sift Science
+# Solutions Engineering @ Sift Science
 export PYTHONPATH="${PYTHONPATH}:$HOME/dev/SE_tools"
 
 # Set Node Path
