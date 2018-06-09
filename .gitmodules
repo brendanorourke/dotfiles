@@ -1,0 +1,6 @@
+[submodule "external/nvm"]
+	path = external/nvm
+	url = https://github.com/creationix/nvm
+[submodule "external/rbenv"]
+	path = external/rbenv
+	url = https://github.com/rbenv/rbenv
