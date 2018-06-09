@@ -1,27 +1,62 @@
 #!/usr/bin/env bash
 
-# Logging stuff.
+###########################################
+# CONSTANTS
+###########################################
+
+EXCEPTION=101
+
+###########################################
+# LOGGING
+###########################################
+
 function e_header()   { echo "\n\033[1m$@\033[0m"; }
 function e_success()  { echo " \033[00;32m✔\033[0m  $@"; }
 function e_error()    { echo " \033[00;31m✖\033[0m  $@"; }
 function e_arrow()    { echo " \033[00;34m➜\033[0m  $@"; }
 
+###########################################
+# UTILITY FUNCTIONS
+###########################################
+
 # Try/Catch block functionality for bash
 # https://stackoverflow.com/questions/22009364/is-there-a-try-catch-command-in-bash
 function try() {
-    [[ $- = *e* ]]; SAVED_OPT_E=$?
-    set +e
+  [[ $- = *e* ]]; SAVED_OPT_E=$?
+  set +e
 }
 
 function catch() {
-    export ex_code=$?
-    (( $SAVED_OPT_E )) && set +e
-    return $ex_code
+  export ex_code=$?
+  (( $SAVED_OPT_E )) && set +e
+  return $ex_code
 }
 
 function throw() { exit $1; }
 function throwErrors() { set -e; }
 function ignoreErrors() { set +e; }
+
+function safe_exec() {
+  local func=${1}
+  local name=${2}
+  try
+  (
+    $func || throw $EXCEPTION
+    e_success "$name successfully installed"
+  )
+  catch || {
+    case $ex_code in
+      $EXCEPTION)
+        e_error "error installing $name"
+        exit 1
+      ;;
+      *)
+        e_error "an unexpected exception was thrown"
+        exit 1
+      ;;
+    esac
+  }
+}
 
 # Testing
 function assert() {

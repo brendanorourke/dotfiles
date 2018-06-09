@@ -6,11 +6,11 @@
 ###########################################
 
 # Various constants.
+DEFAULT_USER="$(id -un)"
 GITHUB_USER="brendanorourke"
 
 # Where the magic happens.
 export DOTFILES=~/.dotfiles
-export EXCEPTION=101
 
 source utils
 
@@ -61,68 +61,50 @@ fi
 # with recent XCode or CLT)
 e_header "Installing git…"
 if [[ ! "$(type -P git)" ]] && is_ubuntu; then
-  try
-  (
-    sudo apt-get -qq install git-core && e_success "git installed" || throw $EXCEPTION
-  )
-  catch || {
-    case $ex_code in
-        $EXCEPTION)
-            e_error "git should be installed. It isn't. Aborting."
-            exit 1
-        ;;
-        *)
-            e_error "An unexpected exception was thrown"
-            exit 1
-        ;;
-    esac
+  install_git() {
+    sudo apt-get -qq install git-core
   }
+  safe_exec install_git "git"
 else
   e_arrow "git already installed"
 fi
 
-# If curl is not installed, install it (Ubuntu only, since curl comes standard
-# on macOS)
+# If curl is not installed, install it (Ubuntu only, curl standard on macOS)
 e_header "Installing curl…"
 if [[ ! "$(type -P curl)" ]] && is_ubuntu; then
-  try
-  (
-    sudo apt-get -qq install curl && e_success "curl installed" || throw $EXCEPTION
-  )
-  catch || {
-    case $ex_code in
-        $EXCEPTION)
-            e_error "curl should be installed. It isn't. Aborting."
-            exit 1
-        ;;
-        *)
-            e_error "An unexpected exception was thrown"
-            exit 1
-        ;;
-    esac
+  install_curl() {
+    sudo apt-get -qq install curl
   }
+  safe_exec install_curl "curl"
 else
   e_arrow "curl already installed"
 fi
 
 # Install vim bundles
 e_header "Installing vim bundles…"
-mkdir -p ~/.vim/bundle
-if [[ ! -e ~/.vim/bundle/vundle ]]; then
-  git clone http://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
-fi
-vim +BundleInstall! +BundleClean +qall 2&> /dev/null
-e_success "vim bundles installed"
+install_vim_bundles() {
+  mkdir -p ~/.vim/bundle
+  if [[ ! -e ~/.vim/bundle/vundle ]]; then
+    git clone http://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+  fi
+  vim +BundleInstall! +BundleClean +qall 2&> /dev/null
+}
+safe_exec install_vim_bundles "vim"
 
 # Install oh-my-zsh
 e_header "Installing Oh My Zsh…"
-curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
+install_ohmyzsh() {
+  curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh && \
+  curl -fsSL http://raw.github.com/caiogondim/bullet-train-oh-my-zsh-theme/master/bullet-train.zsh-theme \
+    --output ~/.oh-my-zsh/themes/bullet-train.zsh-theme
+}
+safe_exec install_ohmyzsh "oh-my-zsh"
 
 # Initialize.
 if [[ ! -d $DOTFILES ]]; then
   e_header "Downloading dotfiles…"
   git clone --recursive git://github.com/$GITHUB_USER/dotfiles.git $DOTFILES
-  cd $DOTFILES || exit
+  cd $DOTFILES && e_success "download successful" || exit
 elif [[ "$1" != "restart" ]]; then
   # Make sure we have the latest files.
   e_header "Updating dotfiles…"
@@ -134,6 +116,7 @@ elif [[ "$1" != "restart" ]]; then
     e_header "Changes detected, restarting script"
     exec "$0" "restart"
   fi
+  e_success "dotfiles updated"
 fi
 
 # Add binaries into the path
