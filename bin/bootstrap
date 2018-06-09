@@ -87,7 +87,7 @@ function setdiff() {
 
 
 # Copy files.
-function copy_header() { e_header "Copying files into home directory."; }
+function copy_header() { e_header "Copying files into home directory…"; }
 
 function copy_test() {
   if [[ -e "$2" && ! "$(cmp "$1" "$2" 2> /dev/null)" ]]; then
@@ -103,7 +103,7 @@ function copy_do() {
 }
 
 # Link files.
-function link_header() { e_header "Linking files into home directory."; }
+function link_header() { e_header "Linking files into home directory…"; }
 
 function link_test() {
   [[ "$1" -ef "$2" ]] && echo "same file"
@@ -160,7 +160,7 @@ fi
 # If Git is not installed, install it (Ubuntu only, since Git comes standard
 # with recent XCode or CLT)
 if [[ ! "$(type -P git)" ]] && is_ubuntu; then
-  e_header "Installing Git"
+  e_header "Installing Git…"
   sudo apt-get -qq install git-core
 fi
 
@@ -173,7 +173,7 @@ fi
 # If curl is not installed, install it (Ubuntu only, since curl comes standard
 # on macOS)
 if [[ ! "$(type -P curl)" ]] && is_ubuntu; then
-  e_header "Installing curl"
+  e_header "Installing curl…"
   sudo apt-get -qq install curl
 fi
 
