@@ -1,1 +1,13 @@
 .idea/
+
+# Local files
+/caches/
+/backups/
+
+# Miscellaneous files to ignore
+.netrwhist
+
+# Never commit these, in a million years
+/link/.ssh/authorized_keys
+/link/.ssh/id_*
+/link/.ssh/known_hosts
