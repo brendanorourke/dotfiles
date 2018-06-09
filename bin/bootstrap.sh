@@ -12,7 +12,7 @@ GITHUB_USER="brendanorourke"
 # Where the magic happens.
 export DOTFILES=~/.dotfiles
 
-source utils.sh
+source $(dirname $0)/utils.sh
 
 # If this file was being sourced, exit now.
 [[ "$1" == "source" ]] && return
@@ -93,6 +93,20 @@ if [[ ! "$(type -P curl)" ]] && is_ubuntu; then
   }
 
   install_stuff "curl"
+fi
+
+#
+# If vim is not installed, install it
+# Ubuntu only, since vim ships with macOS
+#
+if [[ ! "$(type -P vim)" ]] && is_ubuntu; then
+  function git_header() { e_header "Installing vim…"; }
+
+  function git_install() {
+    sudo apt-get -qq install vim
+  }
+
+  install_stuff "vim"
 fi
 
 #
