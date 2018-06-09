@@ -108,8 +108,6 @@ function vimbundles_install() {
   vim +BundleInstall! +BundleClean +qall 2&> /dev/null
 }
 
-install_stuff "vimbundles"
-
 #
 # Install oh-my-zsh
 #
@@ -117,11 +115,8 @@ function ohmyzsh_header() { e_header "Installing Oh My Zsh…"; }
 
 function ohmyzsh_install() {
   curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh && \
-  curl -fsSL http://raw.github.com/caiogondim/bullet-train-oh-my-zsh-theme/master/bullet-train.zsh-theme \
-    --output ~/.oh-my-zsh/themes/bullet-train.zsh-theme
+  cp $DOTFILES/external/themes/bullet-train.zsh-theme ~/.oh-my-zsh/themes/bullet-train.zsh-theme
 }
-
-install_stuff "ohmyzsh"
 
 
 ###########################################
@@ -165,6 +160,9 @@ backup=""
 # Execute code for each file in these subdirectories.
 do_stuff "copy"
 do_stuff "link"
+
+install_stuff "ohmyzsh"
+install_stuff "vimbundles"
 
 # Alert if backups were made.
 if [[ "$backup" ]]; then
