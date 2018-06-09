@@ -19,8 +19,14 @@ function e_arrow()    { echo " \033[00;34m➜\033[0m  $@"; }
 # UTILITY FUNCTIONS
 ###########################################
 
+#
 # Try/Catch block functionality for bash
 # https://stackoverflow.com/questions/22009364/is-there-a-try-catch-command-in-bash
+#
+function throw()        { exit $1; }
+function throwErrors()  { set -e; }
+function ignoreErrors() { set +e; }
+
 function try() {
   [[ $- = *e* ]]; SAVED_OPT_E=$?
   set +e
@@ -31,10 +37,6 @@ function catch() {
   (( $SAVED_OPT_E )) && set +e
   return $ex_code
 }
-
-function throw() { exit $1; }
-function throwErrors() { set -e; }
-function ignoreErrors() { set +e; }
 
 function safe_exec() {
   local func=${1}
@@ -58,7 +60,9 @@ function safe_exec() {
   }
 }
 
+#
 # Testing
+#
 function assert() {
   local success modes equals actual expected
   modes=(e_error e_success); equals=("!=" "=="); expected="$1"; shift
@@ -67,7 +71,9 @@ function assert() {
   ${modes[success]} "\"$actual\" ${equals[success]} \"$expected\""
 }
 
+#
 # OS detection
+#
 function is_osx() {
   [[ "$OSTYPE" =~ ^darwin ]] || return 1
 }
@@ -82,8 +88,9 @@ function get_os() {
   done
 }
 
-# Remove an entry from $PATH
-# Based on http://stackoverflow.com/a/2108540/142339
+#
+# Remove an entry from $PATH (http://stackoverflow.com/a/2108540/142339)
+#
 function path_remove() {
   local arg path
   path=":$PATH:"
@@ -93,10 +100,11 @@ function path_remove() {
   echo "$path"
 }
 
+#
 # Given strings containing space-delimited words A and B, "setdiff A B" will
-# return all words in A that do not exist in B. Arrays in bash are insane
-# (and not in a good way).
-# From http://stackoverflow.com/a/1617303/142339
+# return all words in A that do not exist in B.
+# From (http://stackoverflow.com/a/1617303/142339)
+#
 function setdiff() {
   local debug skip a b
   if [[ "$1" == 1 ]]; then debug=1; shift; fi
@@ -118,11 +126,13 @@ function setdiff() {
   [[ "$1" ]] && echo "${setdiffC[@]}"
 }
 
-# Copy, link, init, etc.
-# Example: do_stuff "copy"
-#          Will then call copy_header(), copy_test(), and copy_do()
-# Note: the header/test/do functions must be defined in the script
-#       you're calling do_stuff from.
+###########################################
+# EXECUTION FUNCTIONS
+###########################################
+
+#
+# File based actions. E.g., copy, link, etc.
+#
 function do_stuff() {
   local base dest skip
   local files=($DOTFILES/$1/*)
@@ -159,11 +169,9 @@ function do_stuff() {
   done
 }
 
-# Copy, link, init, etc.
-# Example: do_stuff "copy"
-#          Will then call copy_header(), copy_test(), and copy_do()
-# Note: the header/test/do functions must be defined in the script
-#       you're calling do_stuff from.
+#
+# Install actions. E.g., git, oh-my-zsh, etc.
+#
 function install_stuff() {
   [[ $(declare -f "$1_header") ]] && "$1_header"
   safe_exec "$1_install" $1
