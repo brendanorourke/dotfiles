@@ -164,8 +164,6 @@ function ohmyzsh_install() {
   cp $DOTFILES/external/themes/bullet-train.zsh-theme ~/.oh-my-zsh/themes/bullet-train.zsh-theme
 }
 
-install_stuff "ohmyzsh"
-
 #
 # Initialize DOTFILES
 #
@@ -206,6 +204,8 @@ backup=""
 do_stuff "copy"
 do_stuff "link"
 do_stuff "init"
+
+install_stuff "ohmyzsh"
 
 # Alert if backups were made.
 if [[ "$backup" ]]; then
