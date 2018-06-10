@@ -11,7 +11,7 @@ DEFAULT_USER="$(id -un)"
 # Look in ~/.oh-my-zsh/themes/
 BULLETTRAIN_TIME_BG="black"
 BULLETTRAIN_TIME_FG="white"
-ZSH=/Users/$DEFAULT_USER/.oh-my-zsh
+ZSH=~/.oh-my-zsh
 ZSH_THEME="bullet-train"
 
 source $ZSH/oh-my-zsh.sh
