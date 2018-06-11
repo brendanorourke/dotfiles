@@ -91,9 +91,9 @@ sudo apt-get -qq update
 # Only do a dist-upgrade on initial install, otherwise do an upgrade.
 e_header "Upgrading APT"
 if is_dotfiles_bin; then
-  sudo apt-get -qy upgrade
+  sudo apt-get -qqy upgrade
 else
-  sudo apt-get -qy dist-upgrade
+  sudo apt-get -qqy dist-upgrade
 fi
 
 # Install APT packages.
@@ -144,11 +144,10 @@ function install_from_zip() {
     rm -rf $tmp
     e_success "installed $name"
   else
-    e_arrow "Skipping $name, already installed"
+    e_arrow "skipping $name, already installed"
   fi
   
 }
-
 
 # Run anything else that may need to be run.
 e_header "Installing misc packages…"
