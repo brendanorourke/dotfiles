@@ -180,7 +180,7 @@ elif [[ "$1" != "restart" ]]; then
   git submodule update --init --recursive
   if [[ "$(git rev-parse HEAD)" != "$prev_head" ]]; then
     e_header "Changes detected, restarting script"
-    exec sudo "$0" "restart"
+    exec bash "$0" "restart"
   fi
   e_success "dotfiles updated"
 fi
