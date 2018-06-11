@@ -15,7 +15,7 @@ release_name=$(lsb_release -c | awk "{print $2}")
 
 function add_ppa() {
   apt_source_texts+=($1)
-  IFS=":/" eval "local parts=($1)"
+  IFS=':/' eval 'local parts=($1)'
   apt_source_files+=("${parts[1]}-ubuntu-${parts[2]}-$release_name")
 }
 
@@ -39,7 +39,7 @@ fi
 function other_stuff() {
   # Install misc bins from zip file.
   install_from_zip ngrok "https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip"
-  install_from_zip exa "https://github.com/ogham/exa/releases/download/v0.8.0/exa-linux-x86_64-0.8.0.zip"
+  install_from_zip exa-linux-x86_64 "https://github.com/ogham/exa/releases/download/v0.8.0/exa-linux-x86_64-0.8.0.zip"
 }
 
 ####################
@@ -48,7 +48,7 @@ function other_stuff() {
 
 # Add APT keys.
 keys_cache=$DOTFILES/caches/init/apt_keys
-IFS=$"\n" GLOBIGNORE="*" command eval "setdiff_cur=($(<$keys_cache))"
+IFS=$'\n' GLOBIGNORE='*' command eval 'setdiff_cur=($(<$keys_cache))'
 setdiff_new=("${apt_keys[@]}"); setdiff; apt_keys=("${setdiff_out[@]}")
 unset setdiff_new setdiff_cur setdiff_out
 
