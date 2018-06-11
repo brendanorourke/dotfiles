@@ -18,9 +18,3 @@ function check_install() {
 #
 function makeDirAndChange() { mkdir $1 && cd $1; }
 function lsAndGrep()        { ls -lAh | grep $1; }
-
-#
-# Copy files over SSH
-#
-function copy_to_se()   { scp $1 $SE_MACHINE_USERNAME@$SE_MACHINE:/home/$SE_MACHINE_USERNAME/$2; }
-function copy_from_se() { scp $SE_MACHINE_USERNAME@$SE_MACHINE:/home/$SE_MACHINE_USERNAME/$1 /Users/$DEFAULT_USER/Desktop; }
