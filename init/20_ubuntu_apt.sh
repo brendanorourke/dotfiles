@@ -142,8 +142,11 @@ function install_from_zip() {
       sudo cp "$tmp/$b" "/usr/local/bin/$(basename $b)"
     done
     rm -rf $tmp
+    e_success "installed $name"
+  else
+    e_arrow "Skipping $name, already installed"
   fi
-  e_success "installed $name"
+  
 }
 
 
