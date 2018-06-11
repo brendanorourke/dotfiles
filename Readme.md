@@ -12,7 +12,7 @@ The below must be pre-installed:
 **Warning**: If you are not me, please read through the code first-- you likely do _not_ want to blindly execute this.
 
 ```shell
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/brendanorourke/dotfiles/master/bin/bootstrap.sh)" && source ~/.zshrc
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/brendanorourke/dotfiles/master/bin/dotflies)" && source ~/.zshrc
 ```
 
 ## License

@@ -40,9 +40,9 @@ function src() {
   fi
 }
 
-# Run bootstrap script, then source.
+# Run dotfiles script, then source.
 function dotfiles() {
-  $DOTFILES/bin/bootstrap "$@" && src
+  $DOTFILES/bin/dotfiles "$@" && src
 }
 
 src

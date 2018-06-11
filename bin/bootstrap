@@ -12,7 +12,7 @@ GITHUB_USER="brendanorourke"
 # Where the magic happens.
 export DOTFILES=~/.dotfiles
 
-source $(dirname $0)/utils.sh
+source $(dirname $0)/utils
 
 # If this file was being sourced, exit now.
 [[ "$1" == "source" ]] && return
@@ -180,7 +180,7 @@ elif [[ "$1" != "restart" ]]; then
   git submodule update --init --recursive
   if [[ "$(git rev-parse HEAD)" != "$prev_head" ]]; then
     e_header "Changes detected, restarting script"
-    exec bash "$0" "restart"
+    exec "$0" "restart"
   fi
   e_success "dotfiles updated"
 fi
