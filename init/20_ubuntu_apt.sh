@@ -11,7 +11,7 @@ deb_sources=()
 installers_path="$DOTFILES/caches/installers"
 
 # Ubuntu distro release name, eg. "xenial"
-release_name=$(lsb_release -c | awk '{print $2}')
+release_name=$(lsb_release -c | awk "{print $2}")
 
 function add_ppa() {
   apt_source_texts+=($1)
@@ -38,7 +38,8 @@ fi
 
 function other_stuff() {
   # Install misc bins from zip file.
-  install_from_zip ngrok 'https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip'
+  install_from_zip ngrok "https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip"
+  install_from_zip exa-linux-x86_64 "https://github.com/ogham/exa/releases/download/v0.8.0/exa-linux-x86_64-0.8.0.zip"
 }
 
 ####################
@@ -141,8 +142,14 @@ function install_from_zip() {
       sudo cp "$tmp/$b" "/usr/local/bin/$(basename $b)"
     done
     rm -rf $tmp
+    e_success "installed $name"
+  else
+    e_arrow "Skipping $name, already installed"
   fi
+  
 }
 
+
 # Run anything else that may need to be run.
+e_header "Installing misc packages…"
 type -t other_stuff >/dev/null && other_stuff
