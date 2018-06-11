@@ -143,7 +143,10 @@ function install_from_zip() {
     done
     rm -rf $tmp
   fi
+  e_success "installed $name"
 }
 
+
 # Run anything else that may need to be run.
+e_header "Installing misc packages…"
 type -t other_stuff >/dev/null && other_stuff

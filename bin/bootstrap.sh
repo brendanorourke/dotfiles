@@ -102,7 +102,7 @@ function init_files() {
 }
 
 function init_do() {
-  e_header "Sourcing $(basename "$2")"
+  e_header "Sourcing $(basename "$2")…"
   source "$2"
 }
 
