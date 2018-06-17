@@ -1,10 +1,6 @@
 #!/usr/bin/env bash
 [[ "$1" == "source" ]] || \
 
-# -----------------------------------------
-# HELPER FUNCTIONS
-# -----------------------------------------
-
 # Various constants.
 DEFAULT_USER="$(id -un)"
 GITHUB_USER="brendanorourke"
@@ -13,6 +9,9 @@ GITHUB_USER="brendanorourke"
 export DOTFILES=~/.dotfiles
 
 source $(dirname $0)/utils
+
+# Set the prompt delay to be longer for the very first run.
+export prompt_delay=5; is_dotfiles_bin || prompt_delay=15
 
 # If this file was being sourced, exit now.
 [[ "$1" == "source" ]] && return
@@ -132,13 +131,15 @@ function init_do() {
 }
 
 # -----------------------------------------
-# DO STUFF!
+# HELPER FUNCTIONS
 # -----------------------------------------
 
-# Set the prompt delay to be longer for the very first run.
-export prompt_delay=5; is_dotfiles_bin || prompt_delay=15
-
+# Enter password up-front and keepalive
 ask_for_sudo
+
+# -----------------------------------------
+# REQUIRED PACKAGES
+# -----------------------------------------
 
 print_header "Install prerequisites"
 
@@ -162,8 +163,6 @@ fi
 
 # If curl is not installed, install it (Ubuntu only, curl standard on macOS)
 if [[ ! "$(type -P curl)" ]] && is_ubuntu; then
-
-  print_header "Installing curl"
     
   execute \
     "sudo apt-get -qq install curl" \
@@ -171,7 +170,10 @@ if [[ ! "$(type -P curl)" ]] && is_ubuntu; then
 
 fi
 
-# Initialize environment
+# -----------------------------------------
+# INITIALIZE DOTFILE ENVIRONMENT
+# -----------------------------------------
+
 print_header "Initializing dotfiles"
 
 if [[ ! -d $DOTFILES ]]; then
@@ -215,10 +217,17 @@ mkdir -p "$DOTFILES/caches/init"
 backup_dir="$DOTFILES/backups/$(date "+%Y_%m_%d-%H_%M_%S")/"
 backup=""
 
-# Execute code for each file in these subdirectories.
+# -----------------------------------------
+# EXECUTE EACH FILE IN PRIMARY DIRS
+# -----------------------------------------
+
 do_stuff "copy"
 do_stuff "link"
 do_stuff "init"
+
+# -----------------------------------------
+# MISC ADD-ONS FOR Z-SHELL
+# -----------------------------------------
 
 print_header "Installing shell add-ons"
 
@@ -229,6 +238,10 @@ execute \
 execute \
   "cp $DOTFILES/external/themes/bullet-train.zsh-theme ~/.oh-my-zsh/themes/bullet-train.zsh-theme" \
   "zsh theme"
+
+# -----------------------------------------
+# CLEANUP
+# -----------------------------------------
 
 # Alert if backups were made.
 if [[ "$backup" ]]; then
