@@ -48,7 +48,7 @@ function copy_do() {
 function link_header() { print_header "Linking files into home directory…"; }
 
 function link_test() {
-  [[ "$1" -ef "$2" ]] && print_warning "same file"
+  [[ "$1" -ef "$2" ]] && print_in_yellow "same file"
 }
 
 function link_do() {
