@@ -16,13 +16,13 @@ brew cask info this-is-somewhat-annoying 2>/dev/null
 
 casks=(
     # Applications
-    docker
-    firefox
-    iterm2
+    #docker
+    #firefox
+    #iterm2
     karabiner-elements
     skype
-    slack
-    spotify
+    #slack
+    #spotify
     # Fonts
     font-m-plus
     font-mplus-nerd-font
