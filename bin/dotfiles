@@ -71,9 +71,10 @@ function cleanup {
 
 trap cleanup EXIT
 
-# Initialize.
+# Cached selections
 init_file=$DOTFILES/caches/init/selected
 
+# Prompt to select files from /init/ to run
 function init_files() {
   
   local i f dirname oses os opt remove
@@ -124,6 +125,7 @@ function init_files() {
 
 }
 
+# Source each file in /init/ directly
 function init_do() {
 
   source "$2"
