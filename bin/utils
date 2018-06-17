@@ -354,7 +354,7 @@ function _prompt_menu_iter() {
 
 function _prompt_menu_draws() {
 
-  prompt_header "\n$1\n"
+  prompt_header "$1\n"
   _prompt_menu_iter _prompt_menu_draw "$2"
 
 }
