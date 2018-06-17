@@ -129,9 +129,7 @@ function init_header() { print_header "Running OS init scripts…"; }
 
 function init_do() {
 
-  execute \
-    ". $2" \
-    "$(basename "$2")"
+  source "$2"
 
 }
 
@@ -180,14 +178,25 @@ print_header "Initializing dotfiles..."
 
 if [[ ! -d $DOTFILES ]]; then
 
-  execute \
-    "git clone --recursive git://github.com/$GITHUB_USER/dotfiles.git $DOTFILES \
-      cd $DOTFILES" "download dotfiles"
+  git clone --recursive git://github.com/$GITHUB_USER/dotfiles.git $DOTFILES
+  cd $DOTFILES && print_success "downloaded dotfiles for $GITHUB_USER"
 
 elif [[ "$1" != "restart" ]]; then
 
-  execute \
-    "update_dotfiles" "update dotfiles"
+  prev_head="$(git rev-parse HEAD)"
+  git pull --recurse-submodules --quiet
+  git submodule update --init --recursive
+
+  if [[ "$(git rev-parse HEAD)" != "$prev_head" ]]; then
+
+    print_warning "Changes detected, restarting script"
+    exec "$0" "restart"
+
+  else
+
+    print_success "updated dotfiles for $GITHUB_USER"
+
+  fi
 
 fi
 

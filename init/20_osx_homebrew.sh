@@ -1,14 +1,24 @@
 # OSX-only stuff. Abort if not OSX.
 is_osx || return 1
 
-# Install Homebrew.
+print_header "Running homebrew health checks…"
+
+# Install Homebrew if not already installed
 if [[ ! "$(type -P brew)" ]]; then
-  e_header "Installing Homebrew"
-  true | ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  
+  execute \
+    "true | ruby -e \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)\"" \
+    "install homebrew"
+
 fi
 
 # Exit if, for some reason, Homebrew is not installed.
-[[ ! "$(type -P brew)" ]] && e_error "Homebrew failed to install." && return 1
+[[ ! "$(type -P brew)" ]] && print_error "homebrew not installed" && return 1
 
-brew doctor
-brew update
+execute \
+  "brew doctor" \
+  "brew doctor"
+
+execute \
+  "brew update" \
+  "brew update"

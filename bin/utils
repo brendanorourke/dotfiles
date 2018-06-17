@@ -294,7 +294,7 @@ function print_warning() {
 
 # Display a fancy multi-select menu. (http://serverfault.com/a/298312)
 
-function prompt_header()   { echo -e "\n\033[1m$@\033[0m"; }
+function prompt_header()   { echo -e "\n\033[1m$@…\033[0m"; }
 function prompt_success()  { echo -e "   \033[00;32m✔\033[0m  $@"; }
 function prompt_error()    { echo -e "   \033[00;31m✖\033[0m  $@"; }
 function prompt_arrow()    { echo -e "   \033[00;34m➜\033[0m  $@"; }
@@ -308,7 +308,8 @@ function prompt_menu() {
   if [[ "$2" ]]; then
   
     _prompt_menu_draws "$1"
-    read -t $2 -n 1 -sp "\nPress ENTER or wait $2 seconds to continue, or press any other key to edit.\n\n"
+    echo "\n"
+    read -t $2 -n 1 -sp "Press ENTER or wait $2 seconds to continue, or press any other key to edit."
     exitcode=$?
     echo ""
   
@@ -353,7 +354,7 @@ function _prompt_menu_iter() {
 
 function _prompt_menu_draws() {
 
-  prompt_header "\n$1\n\n"
+  prompt_header "\n$1\n"
   _prompt_menu_iter _prompt_menu_draw "$2"
 
 }
@@ -492,19 +493,4 @@ function show_spinner() {
     tput rc
 
   done
-}
-
-function update_dotfiles() {
-
-  prev_head="$(git rev-parse HEAD)"
-  git pull --recurse-submodules --quiet
-  git submodule update --init --recursive
-
-  if [[ "$(git rev-parse HEAD)" != "$prev_head" ]]; then
-
-    print_warning "Changes detected, restarting script"
-    exec "$0" "restart"
-
-  fi
-
 }

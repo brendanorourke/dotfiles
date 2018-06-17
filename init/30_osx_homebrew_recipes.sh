@@ -15,10 +15,13 @@ function brew_install_recipes() {
   if (( ${#recipes[@]} > 0 )); then
     
     #e_header "Installing Homebrew recipes: ${recipes[*]}"
+    print_header "Installing Homebrew Recipes"
+
     for recipe in "${recipes[@]}"; do
       
-      brew install $recipe
-      #e_success "$recipe installed"
+      execute \
+        "brew install $recipe" \
+        "$recipe"
     
     done
   

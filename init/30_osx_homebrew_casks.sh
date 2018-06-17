@@ -5,18 +5,22 @@ cd "$(dirname "${BASH_SOURCE[0]}")" \
     && . "../bin/utils"
 
 # Exit if Homebrew is not installed.
-[[ ! "$(type -P brew)" ]] && e_error "Brew casks need Homebrew to install." && return 1
+[[ ! "$(type -P brew)" ]] && print_error "brew casks require homebrew to install." && return 1
 
 # Tap Homebrew kegs.
 function brew_tap_kegs() {
   
+  print_header "Tapping Homebrew Casks"
+
   kegs=($(setdiff "${kegs[*]}" "$(brew tap)"))
   
   if (( ${#kegs[@]} > 0 )); then
   
     for keg in "${kegs[@]}"; do
   
-      brew tap $keg
+      execute \
+        "brew tap $keg" \
+        "$keg"
   
     done
   
@@ -30,15 +34,20 @@ function brew_install_casks() {
   
   if (( ${#casks[@]} > 0 )); then
   
-    e_header "Installing Homebrew casks: ${casks[*]}"
-  
+    #e_header "Installing Homebrew casks: ${casks[*]}"
+    print_header "Installing Homebrew Casks"
+
     for cask in "${casks[@]}"; do
   
-      brew cask install $cask
+      execute \
+        "brew cask install $cask" \
+        "$cask"
 
     done
     
-    brew cask cleanup
+    execute \
+        "brew cask cleanup" \
+        "cleanup"
   
   fi
 
