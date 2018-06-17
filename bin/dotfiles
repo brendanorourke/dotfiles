@@ -26,9 +26,9 @@ function copy_header() { print_header "Copying files into home directory…"; }
 
 function copy_test() {
   if [[ -e "$2" && ! "$(cmp "$1" "$2" 2> /dev/null)" ]]; then
-    print_warning "same file"
+    print_in_yellow "same file"
   elif [[ "$1" -ot "$2" ]]; then
-    print_warning "destination file newer"
+    print_in_yellow "destination file newer"
   fi
 }
 
@@ -68,35 +68,6 @@ DOTFILES_SCRIPT_RUNNING=1
 
 function cleanup {
   unset DOTFILES_SCRIPT_RUNNING
-}
-
-function download() {
-
-  local url="$1"
-  local output="$2"
-
-  if cmd_exists "curl"; then
-
-    curl -LsSo "$output" "$url" &> /dev/null
-    #     │││└─ write output to file
-    #     ││└─ show error messages
-    #     │└─ don't show the progress meter
-    #     └─ follow redirects
-
-    return $?
-
-  elif cmd_exists "wget"; then
-
-    wget -qO "$output" "$url" &> /dev/null
-    #     │└─ write output to file
-    #     └─ don't show output
-
-    return $?
-  
-  fi
-
-  return 1
-
 }
 
 trap cleanup EXIT
