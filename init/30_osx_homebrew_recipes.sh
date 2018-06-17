@@ -9,15 +9,15 @@ recipes=(
     awscli
     coreutils
     exa
-    #git
-    #git-extras
-    #postgresql
-    #reattach-to-user-namespace
+    git
+    git-extras
+    postgresql
+    reattach-to-user-namespace
     thefuck
-    #tmux
-    #tmux-xpanes
-    #tree
-    #wget
+    tmux
+    tmux-xpanes
+    tree
+    wget
 )
 
 brew_install_recipes

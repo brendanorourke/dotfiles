@@ -15,18 +15,13 @@ brew_tap_kegs
 brew cask info this-is-somewhat-annoying 2>/dev/null
 
 casks=(
-    # Applications
-    #docker
-    #firefox
-    #iterm2
+    docker
+    firefox
+    iterm2
     karabiner-elements
     skype
-    #slack
-    #spotify
-    # Fonts
-    font-m-plus
-    font-mplus-nerd-font
-    font-mplus-nerd-font-mono
+    slack
+    spotify
 )
 
 brew_install_casks
