@@ -19,7 +19,7 @@ function brew_tap_kegs() {
     for keg in "${kegs[@]}"; do
   
       execute \
-        "brew tap $keg" \
+        "brew tap $keg &>/dev/null" \
         "$keg"
   
     done
@@ -40,13 +40,13 @@ function brew_install_casks() {
     for cask in "${casks[@]}"; do
   
       execute \
-        "brew cask install $cask" \
+        "brew cask install $cask &>/dev/null" \
         "$cask"
 
     done
     
     execute \
-        "brew cask cleanup" \
+        "brew cask cleanup &>/dev/null" \
         "cleanup"
   
   fi

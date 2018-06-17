@@ -125,8 +125,6 @@ function init_files() {
 
 }
 
-function init_header() { print_header "Running OS init scripts…"; }
-
 function init_do() {
 
   source "$2"

@@ -16,9 +16,9 @@ fi
 [[ ! "$(type -P brew)" ]] && print_error "homebrew not installed" && return 1
 
 execute \
-  "brew doctor" \
+  "brew doctor &>/dev/null" \
   "brew doctor"
 
 execute \
-  "brew update" \
+  "brew update &>/dev/null" \
   "brew update"
