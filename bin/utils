@@ -332,8 +332,7 @@ function prompt_menu() {
   
     _prompt_menu_draws "$1"
     echo ""
-    read -t $2 -n 1 -sp "Press ENTER or wait $2 seconds to continue,\
-       or press any other key to edit."
+    read -t $2 -n 1 -sp "Press ENTER or wait $2 seconds to continue, press any other key to edit."
     exitcode=$?
     echo ""
   
