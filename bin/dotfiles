@@ -176,7 +176,7 @@ print_header "Initializing dotfiles..."
 
 if [[ ! -d $DOTFILES ]]; then
 
-  git clone --recursive git://github.com/$GITHUB_USER/dotfiles.git $DOTFILES
+  git clone --recurse-submodules --quiet git://github.com/$GITHUB_USER/dotfiles.git $DOTFILES
   cd $DOTFILES && print_success "downloaded dotfiles for $GITHUB_USER"
 
 elif [[ "$1" != "restart" ]]; then
