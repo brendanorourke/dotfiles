@@ -217,9 +217,12 @@ do_stuff "init"
 print_header "Installing shell add-ons"
 
 execute \
-  "curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh && \
-    cp $DOTFILES/external/themes/bullet-train.zsh-theme ~/.oh-my-zsh/themes/bullet-train.zsh-theme" \
+  "curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh" \
   "oh-my-zsh"
+
+execute \
+  "cp $DOTFILES/external/themes/bullet-train.zsh-theme ~/.oh-my-zsh/themes/bullet-train.zsh-theme" \
+  "zsh theme"
 
 # Alert if backups were made.
 if [[ "$backup" ]]; then
