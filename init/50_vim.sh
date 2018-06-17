@@ -5,7 +5,7 @@ cd "$(dirname "${BASH_SOURCE[0]}")" \
 
 declare -r BUNDLE_DIR="$HOME/.vim/bundle"
 declare -r VUNDLE_DIR="$HOME/.vim/bundle/vundle"
-declare -r VUNDLE_GIT="http://github.com/gmarik/vundle.git "
+declare -r VUNDLE_GIT="http://github.com/gmarik/vundle.git"
 
 # Backups, swaps and undos are stored here.
 execute \
