@@ -140,7 +140,7 @@ export prompt_delay=5; is_dotfiles_bin || prompt_delay=15
 
 ask_for_sudo
 
-print_header "Install prerequisites…"
+print_header "Install prerequisites"
 
 # Ensure that we can actually, like, compile anything.
 if [[ ! "$(type -P gcc)" ]] && is_osx; then
@@ -163,7 +163,7 @@ fi
 # If curl is not installed, install it (Ubuntu only, curl standard on macOS)
 if [[ ! "$(type -P curl)" ]] && is_ubuntu; then
 
-  print_header "Installing curl…"
+  print_header "Installing curl"
     
   execute \
     "sudo apt-get -qq install curl" \
@@ -172,7 +172,7 @@ if [[ ! "$(type -P curl)" ]] && is_ubuntu; then
 fi
 
 # Initialize environment
-print_header "Initializing dotfiles..."
+print_header "Initializing dotfiles"
 
 if [[ ! -d $DOTFILES ]]; then
 
@@ -214,7 +214,7 @@ do_stuff "copy"
 do_stuff "link"
 do_stuff "init"
 
-print_header "Installing shell add-ons…"
+print_header "Installing shell add-ons"
 
 execute \
   "curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh && \

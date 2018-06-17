@@ -10,7 +10,7 @@ cd "$(dirname "${BASH_SOURCE[0]}")" \
 # Tap Homebrew kegs.
 function brew_tap_kegs() {
   
-  print_header "Tapping Homebrew Casks"
+  print_header "Tapping Homebrew Kegs"
 
   kegs=($(setdiff "${kegs[*]}" "$(brew tap)"))
   

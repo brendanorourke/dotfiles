@@ -1,7 +1,7 @@
 # OSX-only stuff. Abort if not OSX.
 is_osx || return 1
 
-print_header "Running homebrew health checks…"
+print_header "Running homebrew health checks"
 
 # Install Homebrew if not already installed
 if [[ ! "$(type -P brew)" ]]; then
