@@ -192,11 +192,11 @@ elif [[ "$1" != "restart" ]]; then
     print_warning "Changes detected, restarting script"
     exec "$0" "restart"
 
-  else
-
-    print_success "updated dotfiles for $GITHUB_USER"
-
   fi
+
+else
+
+  print_success "updated dotfiles for $GITHUB_USER"
 
 fi
 
