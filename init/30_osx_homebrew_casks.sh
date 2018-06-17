@@ -1,9 +1,6 @@
 # Abort if not OSX
 is_osx || return 1
 
-cd "$(dirname "${BASH_SOURCE[0]}")" \
-    && . "../bin/utils"
-
 # Exit if Homebrew is not installed.
 [[ ! "$(type -P brew)" ]] && print_error "brew casks require homebrew to install." && return 1
 

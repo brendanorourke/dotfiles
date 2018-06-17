@@ -1,8 +1,5 @@
 #!/bin/bash
 
-cd "$(dirname "${BASH_SOURCE[0]}")" \
-  && . "../bin/utils"
-
 declare -r BUNDLE_DIR="$HOME/.vim/bundle"
 declare -r VUNDLE_DIR="$HOME/.vim/bundle/vundle"
 declare -r VUNDLE_GIT="http://github.com/gmarik/vundle.git"

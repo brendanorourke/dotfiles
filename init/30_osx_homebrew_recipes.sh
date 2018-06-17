@@ -1,9 +1,6 @@
 # Abort if not OSX
 is_osx || return 1
 
-cd "$(dirname "${BASH_SOURCE[0]}")" \
-    && . "../bin/utils"
-
 # Exit if homebrew is not installed
 [[ ! "$(type -P brew)" ]] && e_error "Brew recipes need Homebrew to install." && return 1
 
