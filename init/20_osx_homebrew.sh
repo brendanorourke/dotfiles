@@ -14,7 +14,9 @@ e_header "Updating Homebrew"
 brew doctor
 brew update
 
+############################################
 # Functions used in subsequent init scripts.
+############################################
 
 # Tap Homebrew kegs.
 function brew_tap_kegs() {
@@ -23,7 +25,21 @@ function brew_tap_kegs() {
     e_header "Tapping Homebrew kegs: ${kegs[*]}"
     for keg in "${kegs[@]}"; do
       brew tap $keg
+      e_success "$keg tapped"
     done
+  fi
+}
+
+# Install Homebrew casks.
+function brew_install_casks() {
+  casks=($(setdiff "${casks[*]}" "$(brew cask list 2>/dev/null)"))
+  if (( ${#casks[@]} > 0 )); then
+    e_header "Installing Homebrew casks: ${casks[*]}"
+    for cask in "${casks[@]}"; do
+      brew cask install $cask
+      e_success "$cask installed"
+    done
+    brew cask cleanup
   fi
 }
 
@@ -34,6 +50,7 @@ function brew_install_recipes() {
     e_header "Installing Homebrew recipes: ${recipes[*]}"
     for recipe in "${recipes[@]}"; do
       brew install $recipe
+      e_success "$recipe installed"
     done
   fi
 }
