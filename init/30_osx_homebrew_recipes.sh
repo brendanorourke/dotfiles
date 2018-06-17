@@ -8,6 +8,7 @@ is_osx || return 1
 recipes=(
     awscli
     coreutils
+    exa
     git
     git-extras
     postgresql
