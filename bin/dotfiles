@@ -181,6 +181,8 @@ if [[ ! -d $DOTFILES ]]; then
 
 elif [[ "$1" != "restart" ]]; then
 
+  cd $DOTFILES || exit
+
   prev_head="$(git rev-parse HEAD)"
   git pull --recurse-submodules --quiet
   git submodule update --init --recursive
