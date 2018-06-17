@@ -308,7 +308,7 @@ function prompt_menu() {
   if [[ "$2" ]]; then
   
     _prompt_menu_draws "$1"
-    read -t $2 -n 1 -sp "Press ENTER or wait $2 seconds to continue, or press any other key to edit."
+    read -t $2 -n 1 -sp "\nPress ENTER or wait $2 seconds to continue, or press any other key to edit.\n\n"
     exitcode=$?
     echo ""
   
@@ -353,7 +353,7 @@ function _prompt_menu_iter() {
 
 function _prompt_menu_draws() {
 
-  prompt_header "$1"
+  prompt_header "\n$1\n\n"
   _prompt_menu_iter _prompt_menu_draw "$2"
 
 }
