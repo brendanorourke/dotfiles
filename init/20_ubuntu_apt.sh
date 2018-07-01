@@ -290,7 +290,12 @@ deb_sources+=("https://discordapp.com/api/download?platform=linux&format=deb")
 print_header "Adding APT keys (${#apt_keys[@]})"
 
 keys_cache=$DOTFILES/caches/init/apt_keys
-IFS=$'\n' GLOBIGNORE='*' command eval 'setdiff_cur=($(<$keys_cache))'
+
+if [ -f $keys_cache ]; then
+
+  IFS=$'\n' GLOBIGNORE='*' command eval 'setdiff_cur=($(<$keys_cache))'
+
+fi
 
 setdiff_new=("${apt_keys[@]}"); setdiff; apt_keys=("${setdiff_out[@]}")
 unset setdiff_cur setdiff_new setdiff_out
