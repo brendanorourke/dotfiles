@@ -230,17 +230,17 @@ if is_ubuntu_desktop; then
     vlc
   )
 
-  # https://github.com/tagplus5/vscode-ppa
-  apt_keys+=(https://tagplus5.github.io/vscode-ppa/ubuntu/gpg.key)
-  apt_source_files+=(vscode)
-  apt_source_texts+=("deb https://tagplus5.github.io/vscode-ppa/ubuntu ./")
-  apt_packages+=(code code-insiders)
+  # # https://github.com/tagplus5/vscode-ppa
+  # apt_keys+=(https://tagplus5.github.io/vscode-ppa/ubuntu/gpg.key)
+  # apt_source_files+=(vscode)
+  # apt_source_texts+=("deb https://tagplus5.github.io/vscode-ppa/ubuntu ./")
+  # apt_packages+=(code code-insiders)
 
-  # https://www.spotify.com/us/download/linux/
-  apt_keys+=('--keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 0DF731E45CE24F27EEEB1450EFDC8610341D9410 931FF8E79F0876134EDDBDCCA87FF9DF48BF1C90')
-  apt_source_files+=(spotify)
-  apt_source_texts+=("deb http://repository.spotify.com stable non-free")
-  apt_packages+=(spotify-client)
+  # # https://www.spotify.com/us/download/linux/
+  # apt_keys+=('--keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 0DF731E45CE24F27EEEB1450EFDC8610341D9410 931FF8E79F0876134EDDBDCCA87FF9DF48BF1C90')
+  # apt_source_files+=(spotify)
+  # apt_source_texts+=("deb http://repository.spotify.com stable non-free")
+  # apt_packages+=(spotify-client)
 
 fi
 
@@ -249,8 +249,11 @@ fi
 # ADD PACKAGE ARCHIVES
 # ---------------------------
 
+print_header "Adding PPAs"
 
-add_ppa ppa:linuxuprising/java
+  execute \
+    "add_ppa ppa:linuxuprising/java" \
+    "ppa:linuxuprising/java"
 
 apt_packages+=(
   oracle-java10-installer
@@ -272,11 +275,11 @@ function preinstall_oracle-java10-installer() {
 # ---------------------------
 
 
-# deb_installed+=(/usr/bin/slack)
-# deb_sources+=("https://downloads.slack-edge.com/linux_releases/slack-desktop-3.1.0-amd64.deb")
+deb_installed+=(/usr/bin/slack)
+deb_sources+=("https://downloads.slack-edge.com/linux_releases/slack-desktop-3.1.0-amd64.deb")
 
-# deb_installed+=(/usr/bin/discord)
-# deb_sources+=("https://discordapp.com/api/download?platform=linux&format=deb")
+deb_installed+=(/usr/bin/discord)
+deb_sources+=("https://discordapp.com/api/download?platform=linux&format=deb")
 
 
 # ---------------------------
