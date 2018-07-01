@@ -272,11 +272,11 @@ function preinstall_oracle-java10-installer() {
 # ---------------------------
 
 
-deb_installed+=(/usr/bin/slack)
-deb_sources+=("https://downloads.slack-edge.com/linux_releases/slack-desktop-3.1.0-amd64.deb")
+# deb_installed+=(/usr/bin/slack)
+# deb_sources+=("https://downloads.slack-edge.com/linux_releases/slack-desktop-3.1.0-amd64.deb")
 
-deb_installed+=(/usr/bin/discord)
-deb_sources+=("https://discordapp.com/api/download?platform=linux&format=deb")
+# deb_installed+=(/usr/bin/discord)
+# deb_sources+=("https://discordapp.com/api/download?platform=linux&format=deb")
 
 
 # ---------------------------
