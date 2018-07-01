@@ -17,27 +17,11 @@ INSTALLERS_PATH="$DOTFILES/caches/installers"
 # Ubuntu distro release name, eg. "xenial"
 RELEASE_NAME=$(lsb_release -c | awk "{print $2}")
 
-# ---------------------------
-# ADD PACKAGES TO INSTALL
-# ---------------------------
-
-# Misc.
-apt_packages+=()
-
-apt_packages+=(vim)
-is_ubuntu_desktop && apt_packages+=(vim-gnome)
-
-
-if is_ubuntu_desktop; then
-
-  apt_packages+=()
-  apt_packages+=()
-
-fi
 
 # ---------------------------
 # HELPER FUNCTIONS
 # ---------------------------
+
 
 function add_ppa() {
   
@@ -49,8 +33,129 @@ function add_ppa() {
 
 }
 
-# install bins from zip file
+
+function install_apt_keys() {
+
+  local key
+
+  print_header "Adding APT keys (${#apt_keys[@]})"
+
+  for key in "${apt_keys[@]}"; do
+
+    if [[ "$key" =~ -- ]]; then
+
+      execute \
+        "sudo apt-key adv $key" \
+        "$key"
+
+    else
+
+      execute \
+        "wget -qO- $key | sudo apt-key add -" \
+        "$key"
+      
+    fi && \
+    echo "$key" >> $keys_cache
+
+  done
+
+}
+
+
+function install_apt_packages() {
+
+  local package
+
+  print_header "Installing APT packages (${#apt_packages[@]})"
+
+  for package in "${apt_packages[@]}"; do
+
+    if [[ "$(type -t preinstall_$package)" == function ]]; then
+    
+      execute \
+        "preinstall_$package" \
+        "$package (pre-install)"
+
+    fi
+
+    execute \
+      "sudo apt-get -qq install '$package'" \
+      "$package (install)"
+
+    if [[ "$(type -t postinstall_$package)" == function ]]; then
+
+      execute \
+        "postinstall_$package" \
+        "$package (post-install)"
+
+    fi
+
+  done
+
+}
+
+
+function install_apt_sources() {
+
+  local i
+
+  print_header "Adding APT sources (${#source_i[@]})"
+  
+  for i in "${source_i[@]}"; do
+  
+    source_file=${apt_source_files[i]}
+    source_text=${apt_source_texts[i]}
+  
+    if [[ "$source_text" =~ ppa: ]]; then
+  
+      execute \
+        "sudo add-apt-repository -y $source_text" \
+        "$source_text"
+  
+    else
+  
+      execute \
+        $"sudo sh -c \"echo '$source_text' > /etc/apt/sources.list.d/$source_file.list\"" \
+        "$source_file"
+  
+    fi
+  
+  done
+
+}
+
+
+function install_debs() {
+
+  local i
+
+  print_header "Installing debs (${#deb_installed_i[@]})"
+
+  mkdir -p "$INSTALLERS_PATH"
+
+  for i in "${deb_installed_i[@]}"; do
+
+    deb="${deb_sources[i]}"
+    
+    if [[ "$(type -t "$deb")" == function ]]; then
+    
+      deb="$($deb)"
+
+    fi
+
+    installer_file="$INSTALLERS_PATH/$(echo "$deb" | sed 's#.*/##')"
+    
+    execute \
+      "wget -O '$installer_file' '$deb' && sudo dpkg -i '$installer_file'" \
+      "${deb_installed[i]}"
+
+  done
+
+}
+
+
 function install_from_zip() {
+  
   local name=$1 url=$2 bins b zip tmp
   
   shift 2; bins=("$@"); [[ "${#bins[@]}" == 0 ]] && bins=($name)
@@ -58,7 +163,6 @@ function install_from_zip() {
   if [[ ! "$(which $name)" ]]; then
   
     mkdir -p "$INSTALLERS_PATH"
-    e_header "Installing $name"
     zip="$INSTALLERS_PATH/$(echo "$url" | sed 's#.*/##')"
     wget -O "$zip" "$url"
     tmp=$(mktemp -d)
@@ -71,148 +175,196 @@ function install_from_zip() {
     done
   
     rm -rf $tmp
-    e_success "installed $name"
-  
-  else
-  
-    e_arrow "skipping $name, already installed"
-  
+    
   fi
   
 }
 
-# Install misc bins from zip file.
+
 function other_stuff() {
 
-  install_from_zip ngrok "https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip"
-  install_from_zip exa-linux-x86_64 "https://github.com/ogham/exa/releases/download/v0.8.0/exa-linux-x86_64-0.8.0.zip"
+  print_header "Installing bins from zip"
+  
+  execute \
+    "install_from_zip ngrok 'https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip'" \
+    "ngrok"
+
+  execute \
+    "install_from_zip exa-linux-x86_64 'https://github.com/ogham/exa/releases/download/v0.8.0/exa-linux-x86_64-0.8.0.zip'" \
+    "exa-linux-x86_64"
 
 }
 
+
 # ---------------------------
-# ACTUALLY DO THINGS
+# ADD PACKAGES
 # ---------------------------
 
-# Add APT keys.
+
+apt_packages+=(
+  awscli
+  build-essential
+  curl
+  docker.io
+  docker-compose
+  git-core
+  gnome-tweak-tool
+  htop
+  postgresql
+  python-pip
+  thefuck
+  vim
+)
+
+if is_ubuntu_desktop; then
+
+  apt_packages+=(
+    network-manager-openvpn
+    paper-cursor-theme
+    paper-icon-theme
+    python3
+    python3-pip
+    vim-gnome
+    vlc
+  )
+
+  # https://github.com/tagplus5/vscode-ppa
+  apt_keys+=(https://tagplus5.github.io/vscode-ppa/ubuntu/gpg.key)
+  apt_source_files+=(vscode.list)
+  apt_source_texts+=("deb https://tagplus5.github.io/vscode-ppa/ubuntu ./")
+  apt_packages+=(code code-insiders)
+
+  # https://www.spotify.com/us/download/linux/
+  apt_keys+=('--keyserver hkp://keyserver.ubuntu.com:80 --recv-keys BBEBDCB318AD50EC6865090613B00F1FD2C19886')
+  apt_source_files+=(spotify)
+  apt_source_texts+=("deb http://repository.spotify.com stable non-free")
+  apt_packages+=(spotify-client)
+
+fi
+
+
+# ---------------------------
+# ADD PACKAGE ARCHIVES
+# ---------------------------
+
+
+add_ppa ppa:linuxuprising/java
+
+apt_packages+=(
+  oracle-java10-installer
+  oracle-java10-set-default
+)
+
+function preinstall_oracle-java10-installer() {
+  
+  echo oracle-java10-installer shared/accepted-oracle-license-v1-1 select true \
+    | sudo /usr/bin/debconf-set-selections
+  
+  echo oracle-java10-installer shared/accepted-oracle-licence-v1-1 boolean true \
+    | sudo /usr/bin/debconf-set-selections
+}
+
+
+# ---------------------------
+# ADD DEB PACKAGES
+# ---------------------------
+
+
+deb_installed+=(/usr/bin/slack)
+deb_sources+=("https://downloads.slack-edge.com/linux_releases/slack-desktop-2.5.2-amd64.deb")
+
+deb_installed+=(/usr/bin/discord)
+deb_sources+=("https://discordapp.com/api/download?platform=linux&format=deb")
+
+
+# ---------------------------
+# INSTALL APT KEYS
+# ---------------------------
+
+
 keys_cache=$DOTFILES/caches/init/apt_keys
 IFS=$'\n' GLOBIGNORE='*' command eval 'setdiff_cur=($(<$keys_cache))'
 
 setdiff_new=("${apt_keys[@]}"); setdiff; apt_keys=("${setdiff_out[@]}")
-unset setdiff_new setdiff_cur setdiff_out
+unset setdiff_cur setdiff_new setdiff_out
 
 if (( ${#apt_keys[@]} > 0 )); then
 
-  e_header "Adding APT keys (${#apt_keys[@]})"
-
-  for key in "${apt_keys[@]}"; do
-
-    e_arrow "$key"
-
-    if [[ "$key" =~ -- ]]; then
-
-      sudo apt-key adv $key
-
-    else
-
-      wget -qO- $key | sudo apt-key add -
-
-    fi && \
-    echo "$key" >> $keys_cache
-
-  done
+  install_apt_keys
 
 fi
 
-# Add APT sources.
+
+# ---------------------------
+# INSTALL APT SOURCES
+# ---------------------------
+
+
 function __temp() { [[ ! -e /etc/apt/sources.list.d/$1.list ]]; }
 source_i=($(array_filter_i apt_source_files __temp))
 
 if (( ${#source_i[@]} > 0 )); then
  
-  e_header "Adding APT sources (${#source_i[@]})"
-  
-  for i in "${source_i[@]}"; do
-  
-    source_file=${apt_source_files[i]}
-    source_text=${apt_source_texts[i]}
-  
-    if [[ "$source_text" =~ ppa: ]]; then
-  
-      e_arrow "$source_text"
-      sudo add-apt-repository -y $source_text
-  
-    else
-  
-      e_arrow "$source_file"
-      sudo sh -c "echo '$source_text' > /etc/apt/sources.list.d/$source_file.list"
-  
-    fi
-  
-  done
-
+  install_apt_sources
 
 fi
 
-# Update APT.
-e_header "Updating APT"
-sudo apt-get -qq update
+
+# ---------------------------
+# Update APT
+# ---------------------------
+
+
+print_header "Updating packages"
+
+execute \
+  "sudo apt-get -qq update" \
+  "apt-get update"
 
 # Only do a dist-upgrade on initial install, otherwise do an upgrade.
-e_header "Upgrading APT"
-
 if is_dotfiles_bin; then
 
-  sudo apt-get -qqy upgrade
+  execute \
+    "sudo apt-get -qqy upgrade" \
+    "apt-get upgrade"
 
 else
 
-  sudo apt-get -qqy dist-upgrade
+  execute \
+    "sudo apt-get -qqy dist-upgrade" \
+    "apt-get dist-upgrade"
 
 fi
 
-# Install APT packages.
+
+# ---------------------------
+# Update APT
+# ---------------------------
+
+
 installed_apt_packages="$(dpkg --get-selections | grep -v deinstall | awk 'BEGIN{FS="[\t:]"}{print $1}' | uniq)"
 apt_packages=($(setdiff "${apt_packages[*]}" "$installed_apt_packages"))
 
 if (( ${#apt_packages[@]} > 0 )); then
 
-  e_header "Installing APT packages (${#apt_packages[@]})"
-
-  for package in "${apt_packages[@]}"; do
-
-    e_arrow "$package"
-    [[ "$(type -t preinstall_$package)" == function ]] && preinstall_$package
-
-    sudo apt-get -qq install "$package" && \
-    [[ "$(type -t postinstall_$package)" == function ]] && postinstall_$package
-
-  done
+  install_apt_packages
 
 fi
 
-# Install debs via dpkg
+
+# ---------------------------
+# INSTALL DEBS VIA DPKG
+# ---------------------------
+
+
 function __temp() { [[ ! -e "$1" ]]; }
 deb_installed_i=($(array_filter_i deb_installed __temp))
 
 if (( ${#deb_installed_i[@]} > 0 )); then
 
-  mkdir -p "$INSTALLERS_PATH"
-
-  e_header "Installing debs (${#deb_installed_i[@]})"
-
-  for i in "${deb_installed_i[@]}"; do
-
-    e_arrow "${deb_installed[i]}"
-    deb="${deb_sources[i]}"
-    [[ "$(type -t "$deb")" == function ]] && deb="$($deb)"
-    installer_file="$INSTALLERS_PATH/$(echo "$deb" | sed 's#.*/##')"
-    wget -O "$installer_file" "$deb"
-    sudo dpkg -i "$installer_file"
-
-  done
+  install_debs
 
 fi
 
 # Run anything else that may need to be run.
-e_header "Installing misc packages…"
 type -t other_stuff >/dev/null && other_stuff
