@@ -15,7 +15,7 @@ deb_sources=()
 INSTALLERS_PATH="$DOTFILES/caches/installers"
 
 # Ubuntu distro release name, eg. "xenial"
-RELEASE_NAME=$(lsb_release -c | awk "{print $2}")
+RELEASE_NAME=$(lsb_release -c | awk "{ print $2 }" | sed "s/[.]//")
 
 
 # ---------------------------
@@ -46,8 +46,6 @@ function install_apt_keys() {
 
   local key
 
-  print_header "Adding APT keys (${#apt_keys[@]})"
-
   for key in "${apt_keys[@]}"; do
 
     if [[ "$key" =~ -- ]]; then
@@ -73,8 +71,6 @@ function install_apt_keys() {
 function install_apt_packages() {
 
   local package
-
-  print_header "Installing APT packages (${#apt_packages[@]})"
 
   for package in "${apt_packages[@]}"; do
 
@@ -106,8 +102,6 @@ function install_apt_packages() {
 function install_apt_sources() {
 
   local i
-
-  print_header "Adding APT sources (${#source_i[@]})"
   
   for i in "${source_i[@]}"; do
   
@@ -136,8 +130,6 @@ function install_apt_sources() {
 function install_debs() {
 
   local i
-
-  print_header "Installing debs (${#deb_installed_i[@]})"
 
   mkdir -p "$INSTALLERS_PATH"
 
@@ -295,6 +287,8 @@ deb_sources+=("https://discordapp.com/api/download?platform=linux&format=deb")
 # ---------------------------
 
 
+print_header "Adding APT keys (${#apt_keys[@]})"
+
 keys_cache=$DOTFILES/caches/init/apt_keys
 IFS=$'\n' GLOBIGNORE='*' command eval 'setdiff_cur=($(<$keys_cache))'
 
@@ -312,6 +306,7 @@ fi
 # INSTALL APT SOURCES
 # ---------------------------
 
+print_header "Adding APT sources (${#source_i[@]})"
 
 function __temp() { [[ ! -e /etc/apt/sources.list.d/$1.list ]]; }
 source_i=($(array_filter_i apt_source_files __temp))
@@ -355,6 +350,8 @@ fi
 # ---------------------------
 
 
+print_header "Installing APT packages (${#apt_packages[@]})"
+
 installed_apt_packages="$(dpkg --get-selections | grep -v deinstall | awk 'BEGIN{FS="[\t:]"}{print $1}' | uniq)"
 apt_packages=($(setdiff "${apt_packages[*]}" "$installed_apt_packages"))
 
@@ -369,6 +366,8 @@ fi
 # INSTALL DEBS VIA DPKG
 # ---------------------------
 
+
+print_header "Installing debs (${#deb_installed_i[@]})"
 
 function __temp() { [[ ! -e "$1" ]]; }
 deb_installed_i=($(array_filter_i deb_installed __temp))
