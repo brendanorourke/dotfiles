@@ -28,8 +28,16 @@ function add_ppa() {
   apt_source_texts+=($1)
   
   IFS=':/' eval 'local parts=($1)'
-  
   apt_source_files+=("${parts[1]}-ubuntu-${parts[2]}-$RELEASE_NAME")
+
+}
+
+
+function add_source_to_etc() {
+
+  local text=$1 file=$2
+
+  sudo sh -c "echo '$text' > /etc/apt/sources.list.d/$file.list"
 
 }
 
@@ -115,7 +123,7 @@ function install_apt_sources() {
     else
   
       execute \
-        $"sudo sh -c \"echo '$source_text' > /etc/apt/sources.list.d/$source_file.list\"" \
+        "add_source_to_etc $source_text $source_file" \
         "$source_file"
   
     fi
