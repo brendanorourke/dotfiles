@@ -164,7 +164,7 @@ function install_from_zip() {
   
     mkdir -p "$INSTALLERS_PATH"
     zip="$INSTALLERS_PATH/$(echo "$url" | sed 's#.*/##')"
-    wget -O "$zip" "$url"
+    wget -qO "$zip" "$url"
     tmp=$(mktemp -d)
     unzip "$zip" -d "$tmp"
   
@@ -232,12 +232,12 @@ if is_ubuntu_desktop; then
 
   # https://github.com/tagplus5/vscode-ppa
   apt_keys+=(https://tagplus5.github.io/vscode-ppa/ubuntu/gpg.key)
-  apt_source_files+=(vscode.list)
+  apt_source_files+=(vscode)
   apt_source_texts+=("deb https://tagplus5.github.io/vscode-ppa/ubuntu ./")
   apt_packages+=(code code-insiders)
 
   # https://www.spotify.com/us/download/linux/
-  apt_keys+=('--keyserver hkp://keyserver.ubuntu.com:80 --recv-keys BBEBDCB318AD50EC6865090613B00F1FD2C19886')
+  apt_keys+=('--keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 0DF731E45CE24F27EEEB1450EFDC8610341D9410 931FF8E79F0876134EDDBDCCA87FF9DF48BF1C90')
   apt_source_files+=(spotify)
   apt_source_texts+=("deb http://repository.spotify.com stable non-free")
   apt_packages+=(spotify-client)
@@ -273,7 +273,7 @@ function preinstall_oracle-java10-installer() {
 
 
 deb_installed+=(/usr/bin/slack)
-deb_sources+=("https://downloads.slack-edge.com/linux_releases/slack-desktop-2.5.2-amd64.deb")
+deb_sources+=("https://downloads.slack-edge.com/linux_releases/slack-desktop-3.1.0-amd64.deb")
 
 deb_installed+=(/usr/bin/discord)
 deb_sources+=("https://discordapp.com/api/download?platform=linux&format=deb")
