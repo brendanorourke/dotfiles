@@ -15,7 +15,7 @@ deb_sources=()
 INSTALLERS_PATH="$DOTFILES/caches/installers"
 
 # Ubuntu distro release name, eg. "xenial"
-RELEASE_NAME=$(lsb_release -c | awk "{ print $2 }" | sed "s/[.]//")
+RELEASE_NAME=$(lsb_release -c | awk '{ print $2 }' | sed 's/[.]//')
 
 
 # ---------------------------
@@ -251,9 +251,9 @@ fi
 
 print_header "Adding PPAs"
 
-  execute \
-    "add_ppa ppa:linuxuprising/java" \
-    "ppa:linuxuprising/java"
+execute \
+  "add_ppa ppa:linuxuprising/java" \
+  "ppa:linuxuprising/java"
 
 apt_packages+=(
   oracle-java10-installer
