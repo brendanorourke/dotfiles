@@ -146,7 +146,7 @@ function install_debs() {
     installer_file="$INSTALLERS_PATH/$(echo "$deb" | sed 's#.*/##')"
     
     execute \
-      "wget -O '$installer_file' '$deb' && sudo dpkg -i '$installer_file'" \
+      "wget -qO '$installer_file' '$deb' && sudo dpkg -i '$installer_file'" \
       "${deb_installed[i]}"
 
   done
@@ -219,6 +219,8 @@ apt_packages+=(
 if is_ubuntu_desktop; then
 
   apt_packages+=(
+    gdebi-core
+    libc++1
     network-manager-openvpn
     paper-cursor-theme
     paper-icon-theme
