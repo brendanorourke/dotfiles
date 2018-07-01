@@ -108,7 +108,7 @@ function install_apt_sources() {
     else
   
       execute \
-        "sudo su -c ""echo '$source_text' | sudo tee /etc/apt/sources.list.d/$source_file.list" \
+        "sudo sh -c ""echo '$source_text' | sudo tee /etc/apt/sources.list.d/$source_file.list" \
         "$source_file"
   
     fi
