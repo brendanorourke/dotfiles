@@ -35,7 +35,7 @@ function add_ppa() {
 
 function add_source_to_etc() {
 
-  local text=$1 file=$2
+  local file=$1 text=$2
 
   sudo sh -c "echo '$text' > /etc/apt/sources.list.d/$file.list"
 
