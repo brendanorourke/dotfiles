@@ -33,15 +33,6 @@ function add_ppa() {
 }
 
 
-function add_source_to_etc() {
-
-  local file=$1 text=$2
-
-  sudo sh -c "echo '$text' > /etc/apt/sources.list.d/$file.list"
-
-}
-
-
 function install_apt_keys() {
 
   local key
@@ -117,7 +108,7 @@ function install_apt_sources() {
     else
   
       execute \
-        "add_source_to_etc $source_text $source_file" \
+        "sudo sh -c ""echo '$source_text' > /etc/apt/sources.list.d/$source_file.list" \
         "$source_file"
   
     fi
@@ -287,8 +278,6 @@ deb_sources+=("https://discordapp.com/api/download?platform=linux&format=deb")
 # ---------------------------
 
 
-print_header "Adding APT keys (${#apt_keys[@]})"
-
 keys_cache=$DOTFILES/caches/init/apt_keys
 
 if [ -f $keys_cache ]; then
@@ -299,6 +288,8 @@ fi
 
 setdiff_new=("${apt_keys[@]}"); setdiff; apt_keys=("${setdiff_out[@]}")
 unset setdiff_cur setdiff_new setdiff_out
+
+print_header "Adding APT keys (${#apt_keys[@]})"
 
 if (( ${#apt_keys[@]} > 0 )); then
 
@@ -311,10 +302,10 @@ fi
 # INSTALL APT SOURCES
 # ---------------------------
 
-print_header "Adding APT sources (${#source_i[@]})"
-
 function __temp() { [[ ! -e /etc/apt/sources.list.d/$1.list ]]; }
 source_i=($(array_filter_i apt_source_files __temp))
+
+print_header "Adding APT sources (${#source_i[@]})"
 
 if (( ${#source_i[@]} > 0 )); then
  
@@ -355,10 +346,10 @@ fi
 # ---------------------------
 
 
-print_header "Installing APT packages (${#apt_packages[@]})"
-
 installed_apt_packages="$(dpkg --get-selections | grep -v deinstall | awk 'BEGIN{FS="[\t:]"}{print $1}' | uniq)"
 apt_packages=($(setdiff "${apt_packages[*]}" "$installed_apt_packages"))
+
+print_header "Installing APT packages (${#apt_packages[@]})"
 
 if (( ${#apt_packages[@]} > 0 )); then
 
@@ -372,10 +363,10 @@ fi
 # ---------------------------
 
 
-print_header "Installing debs (${#deb_installed_i[@]})"
-
 function __temp() { [[ ! -e "$1" ]]; }
 deb_installed_i=($(array_filter_i deb_installed __temp))
+
+print_header "Installing debs (${#deb_installed_i[@]})"
 
 if (( ${#deb_installed_i[@]} > 0 )); then
 
