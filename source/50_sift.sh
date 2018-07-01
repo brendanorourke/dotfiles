@@ -1,22 +1,21 @@
 # Solutions Engineering @ Sift Science
 
-if [ -f ~/.sift ]; then
-    source ~/.sift
+# ----------------
+# Load Env Vars
+# ----------------
+
+SIFT_CONFIG=~/.sift
+
+if [ -f $SIFT_CONFIG ]; then
+    source $SIFT_CONFIG
+    export $(cut -d= -f1 $SIFT_CONFIG)
 fi
-
-
-# ----------------
-# Export Variables
-# ----------------
-export SE_MACHINE=$SE_MACHINE
-export SE_MACHINE_USERNAME=$SE_MACHINE_USERNAME
-export SIFT_ACCOUNT_ID=$SIFT_ACCOUNT_ID
-export SIFT_REST_KEY=$SIFT_REST_KEY
 
 
 # ----------------
 # Path Updates
 # ----------------
+
 export PYTHONPATH="${PYTHONPATH}:$HOME/dev/SE_tools"
 
 
