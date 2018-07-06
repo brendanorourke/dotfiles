@@ -1,5 +1,5 @@
 # Abort if not OSX
-is_ubuntu || return 1
+is_osx || return 1
 
 # Use exa in place of ls if installed
 if command -v exa >/dev/null 2>&1; then
