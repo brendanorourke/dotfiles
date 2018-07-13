@@ -211,11 +211,14 @@ if is_ubuntu_desktop; then
 
   apt_packages+=(
     gdebi-core
+    jupyter-core
     libc++1
     network-manager-openvpn
     paper-cursor-theme
     paper-icon-theme
+    python-ipykernel
     python3
+    python3-notebook
     python3-pip
     vim-gnome
     vlc
