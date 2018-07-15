@@ -63,6 +63,8 @@ brew cask info this-is-somewhat-annoying 2>/dev/null
 casks=(
     docker
     firefox
+    font-menlo-for-powerline
+    font-meslo-for-powerline
     iterm2
     karabiner-elements
     skype
