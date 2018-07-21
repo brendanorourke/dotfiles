@@ -1,16 +1,14 @@
 # Ubuntu-only stuff. Abort if not Ubuntu.
 is_ubuntu || return 1
 
-# ---------------------------
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # VARS AND CONSTS
-# ---------------------------
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 apt_keys=()
 apt_packages=()
 apt_source_files=()
 apt_source_texts=()
-deb_installed=()
-deb_sources=()
 
 INSTALLERS_PATH="$DOTFILES/caches/installers"
 
@@ -18,9 +16,9 @@ INSTALLERS_PATH="$DOTFILES/caches/installers"
 RELEASE_NAME=$(lsb_release -c | awk '{ print $2 }' | sed 's/[.]//')
 
 
-# ---------------------------
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # HELPER FUNCTIONS
-# ---------------------------
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 
 function add_ppa() {
@@ -118,78 +116,9 @@ function install_apt_sources() {
 }
 
 
-function install_debs() {
-
-  local i
-
-  mkdir -p "$INSTALLERS_PATH"
-
-  for i in "${deb_installed_i[@]}"; do
-
-    deb="${deb_sources[i]}"
-    
-    if [[ "$(type -t "$deb")" == function ]]; then
-    
-      deb="$($deb)"
-
-    fi
-
-    installer_file="$INSTALLERS_PATH/$(echo "$deb" | sed 's#.*/##')"
-    
-    execute \
-      "wget -qO '$installer_file' '$deb' && sudo dpkg -i '$installer_file'" \
-      "${deb_installed[i]}"
-
-  done
-
-}
-
-
-function install_from_zip() {
-  
-  local name=$1 url=$2 bins b zip tmp
-  
-  shift 2; bins=("$@"); [[ "${#bins[@]}" == 0 ]] && bins=($name)
-  
-  if [[ ! "$(which $name)" ]]; then
-  
-    mkdir -p "$INSTALLERS_PATH"
-    zip="$INSTALLERS_PATH/$(echo "$url" | sed 's#.*/##')"
-    wget -qO "$zip" "$url"
-    tmp=$(mktemp -d)
-    unzip "$zip" -d "$tmp"
-  
-    for b in "${bins[@]}"; do
-  
-      sudo cp "$tmp/$b" "/usr/local/bin/$(basename $b)"
-  
-    done
-  
-    rm -rf $tmp
-    
-  fi
-  
-}
-
-
-function other_stuff() {
-
-  print_header "Installing bins from zip"
-  
-  execute \
-    "install_from_zip ngrok 'https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip'" \
-    "ngrok"
-
-  execute \
-    "install_from_zip exa-linux-x86_64 'https://github.com/ogham/exa/releases/download/v0.8.0/exa-linux-x86_64-0.8.0.zip'" \
-    "exa-linux-x86_64"
-
-}
-
-
-# ---------------------------
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # ADD PACKAGES
-# ---------------------------
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 
 apt_packages+=(
@@ -240,9 +169,9 @@ if is_ubuntu_desktop; then
 fi
 
 
-# ---------------------------
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # ADD PACKAGE ARCHIVES
-# ---------------------------
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 print_header "Adding PPAs"
 
@@ -265,21 +194,9 @@ function preinstall_oracle-java10-installer() {
 }
 
 
-# ---------------------------
-# ADD DEB PACKAGES
-# ---------------------------
-
-
-deb_installed+=(/usr/bin/slack)
-deb_sources+=("https://downloads.slack-edge.com/linux_releases/slack-desktop-3.1.0-amd64.deb")
-
-deb_installed+=(/usr/bin/discord)
-deb_sources+=("https://discordapp.com/api/download?platform=linux&format=deb")
-
-
-# ---------------------------
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # INSTALL APT KEYS
-# ---------------------------
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 
 keys_cache=$DOTFILES/caches/init/apt_keys
@@ -302,9 +219,9 @@ if (( ${#apt_keys[@]} > 0 )); then
 fi
 
 
-# ---------------------------
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # INSTALL APT SOURCES
-# ---------------------------
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 function __temp() { [[ ! -e /etc/apt/sources.list.d/$1.list ]]; }
 source_i=($(array_filter_i apt_source_files __temp))
@@ -318,9 +235,9 @@ if (( ${#source_i[@]} > 0 )); then
 fi
 
 
-# ---------------------------
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Update APT
-# ---------------------------
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 
 print_header "Updating packages"
@@ -345,9 +262,9 @@ else
 fi
 
 
-# ---------------------------
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # INSTALL APT PACKAGES
-# ---------------------------
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 
 installed_apt_packages="$(dpkg --get-selections | grep -v deinstall | awk 'BEGIN{FS="[\t:]"}{print $1}' | uniq)"
@@ -360,23 +277,3 @@ if (( ${#apt_packages[@]} > 0 )); then
   install_apt_packages
 
 fi
-
-
-# ---------------------------
-# INSTALL DEBS VIA DPKG
-# ---------------------------
-
-
-function __temp() { [[ ! -e "$1" ]]; }
-deb_installed_i=($(array_filter_i deb_installed __temp))
-
-print_header "Installing debs (${#deb_installed_i[@]})"
-
-if (( ${#deb_installed_i[@]} > 0 )); then
-
-  install_debs
-
-fi
-
-# Run anything else that may need to be run.
-type -t other_stuff >/dev/null && other_stuff
