@@ -7,6 +7,7 @@ PREFIX="Set Preferences: "
 # CHROME
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+
 print_header $PREFIX"Chrome"
 
 execute "defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool false" \
@@ -17,9 +18,11 @@ execute "defaults write com.google.Chrome PMPrintingExpandedStateForPrint2 -bool
 
 killall "Google Chrome" &> /dev/null
 
+
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # FINDER
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 
 print_header $PREFIX"Finder"
 
@@ -54,9 +57,11 @@ execute "defaults write -g AppleShowAllExtensions -bool true" \
 
 killall "Finder" &> /dev/null
 
+
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # FIREFOX
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 
 print_header $PREFIX"Firefox"
 
@@ -65,9 +70,11 @@ execute "defaults write org.mozilla.firefox AppleEnableSwipeNavigateWithScrolls 
 
 killall "firefox" &> /dev/null
 
+
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # KEYBOARD
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 
 print_header $PREFIX"Keyboard"
 
@@ -89,9 +96,11 @@ execute "defaults write -g NSAutomaticQuoteSubstitutionEnabled -bool false" \
 execute "defaults write -g NSAutomaticDashSubstitutionEnabled -bool false" \
     "Disable smart dashes"
 
+
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # PHOTOS
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 
 print_header $PREFIX"Photos"
 
@@ -100,9 +109,11 @@ execute "defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool
 
 killall "Photos" &> /dev/null
 
+
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # UI/UX
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 
 print_header $PREFIX"UI/UX"
 
