@@ -18,6 +18,7 @@ kegs=(
 casks=(
     docker
     firefox
+    font-fire-code
     font-menlo-for-powerline
     font-meslo-for-powerline
     iterm2
