@@ -9,7 +9,7 @@ module.exports = {
         updateChannel: 'stable',
 
         // default font size in pixels for all tabs
-        fontSize: 14,
+        fontSize: 12,
 
         // font family with optional fallbacks
         fontFamily: '"Fira Code", "Hack Nerd Font"',
@@ -18,7 +18,7 @@ module.exports = {
         cursorColor: '#FFFFFF',
 
         // `BEAM` for |, `UNDERLINE` for _, `BLOCK` for █
-        cursorShape: 'BEAM',
+        cursorShape: 'BLOCK',
 
         // set to true for blinking cursor
         cursorBlink: false,
@@ -52,7 +52,7 @@ module.exports = {
         },
 
         // custom padding (css format, i.e.: `top right bottom left`)
-        padding: '12px 2px',
+        padding: '12px 12px',
 
         // the full list. if you're going to provide the full color palette,
         // including the 6 x 6 color cubes and the grayscale map, just provide
