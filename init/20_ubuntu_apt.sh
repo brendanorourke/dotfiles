@@ -139,6 +139,7 @@ apt_packages+=(
 if is_ubuntu_desktop; then
 
   apt_packages+=(
+    fonts-firacode
     fonts-powerline
     gdebi-core
     jupyter-core
