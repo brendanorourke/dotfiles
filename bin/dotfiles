@@ -239,7 +239,11 @@ execute \
 
 execute \
   "cp $DOTFILES/external/themes/bullet-train.zsh-theme ~/.oh-my-zsh/themes/bullet-train.zsh-theme" \
-  "zsh theme"
+  "zsh theme: bullet-train"
+
+execute \
+  "cp $DOTFILES/external/themes/common.zsh-theme ~/.oh-my-zsh/themes/common.zsh-theme" \
+  "zsh theme: common"
 
 # -----------------------------------------
 # CLEANUP

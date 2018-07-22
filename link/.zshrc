@@ -12,7 +12,7 @@ DEFAULT_USER="$(id -un)"
 BULLETTRAIN_TIME_BG="black"
 BULLETTRAIN_TIME_FG="white"
 ZSH=~/.oh-my-zsh
-ZSH_THEME="bullet-train"
+ZSH_THEME="common"
 
 source $ZSH/oh-my-zsh.sh
 
