@@ -21,6 +21,7 @@ casks=(
     font-fire-code
     font-menlo-for-powerline
     font-meslo-for-powerline
+    hyper
     iterm2
     karabiner-elements
     skype
