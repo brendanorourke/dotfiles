@@ -175,7 +175,7 @@ fi
 
 # DIR
 if [ ! -n "${BULLETTRAIN_DIR_BG+1}" ]; then
-  BULLETTRAIN_DIR_BG=blue
+  BULLETTRAIN_DIR_BG=black
 fi
 if [ ! -n "${BULLETTRAIN_DIR_FG+1}" ]; then
   BULLETTRAIN_DIR_FG=white
