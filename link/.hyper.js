@@ -52,7 +52,7 @@ module.exports = {
         },
 
         // custom padding (css format, i.e.: `top right bottom left`)
-        padding: '12px 14px',
+        padding: '12px 2px',
 
         // the full list. if you're going to provide the full color palette,
         // including the 6 x 6 color cubes and the grayscale map, just provide
@@ -117,7 +117,7 @@ module.exports = {
     // format: [@org/]project[#version]
     // examples:
     //   `hyperpower`
-    plugins: ['hyper-tabs-enhanced'],
+    plugins: ['hyper-statusline', 'hyper-tabs-enhanced'],
 
     // in development, you can create a directory under
     // `~/.hyper_plugins/local/` and include it here
