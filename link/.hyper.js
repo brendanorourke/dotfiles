@@ -51,6 +51,13 @@ module.exports = {
             trafficButtons: true,
         },
 
+        // https://www.npmjs.com/package/hyper-transparent
+        hyperTransparent: {
+            backgroundColor: '#2A2D37',
+            opacity: 0.2,
+            vibrancy: 'medium-light' // ['', 'dark', 'medium-light', 'ultra-dark']
+        },
+
         // custom padding (css format, i.e.: `top right bottom left`)
         padding: '12px 12px',
 
@@ -117,7 +124,7 @@ module.exports = {
     // format: [@org/]project[#version]
     // examples:
     //   `hyperpower`
-    plugins: ['hyper-statusline', 'hyper-tabs-enhanced'],
+    plugins: ['hyper-statusline', 'hyper-tabs-enhanced', 'hyper-transparent'],
 
     // in development, you can create a directory under
     // `~/.hyper_plugins/local/` and include it here
