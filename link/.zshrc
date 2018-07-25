@@ -28,6 +28,11 @@ export DOTFILES=~/.dotfiles
 PATH=$DOTFILES/bin:$PATH
 export PATH
 
+# Add golang to path
+export PATH=$PATH:/home/$DEFAULT_USER/.go/bin
+export GOPATH=/home/$DEFAULT_USER/go
+export PATH=$PATH:/home/$DEFAULT_USER/go/bin
+
 # Source all files in "source"
 function src() {
   local file
