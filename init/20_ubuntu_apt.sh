@@ -146,8 +146,6 @@ if is_ubuntu_desktop; then
     jupyter-core
     libc++1
     network-manager-openvpn
-    paper-cursor-theme
-    paper-icon-theme
     python-ipykernel
     python3
     python3-notebook
