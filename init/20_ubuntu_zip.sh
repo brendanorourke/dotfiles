@@ -66,8 +66,8 @@ print_header "Installing bins from ZIP (${#zip_names[@]})"
 
 for i in "${zip_urls[@]}"; do
 
-    zip_name=${zip_names[i]}
-    zip_url=${zip_urls[i]}
+    zip_name="${zip_names[i]}"
+    zip_url="${zip_urls[i]}"
 
     execute \
         "install_from_zip $zip_name '$zip_url'" \
