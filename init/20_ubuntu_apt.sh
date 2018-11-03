@@ -139,6 +139,7 @@ apt_packages+=(
 if is_ubuntu_desktop; then
 
   apt_packages+=(
+    default-jdk
     fonts-firacode
     fonts-powerline
     gdebi-core
@@ -168,31 +169,6 @@ if is_ubuntu_desktop; then
   apt_packages+=(spotify-client)
 
 fi
-
-
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-# ADD PACKAGE ARCHIVES
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-print_header "Adding PPAs"
-
-execute \
-  "add_ppa ppa:linuxuprising/java" \
-  "ppa:linuxuprising/java"
-
-apt_packages+=(
-  oracle-java10-installer
-  oracle-java10-set-default
-)
-
-function preinstall_oracle-java10-installer() {
-  
-  echo oracle-java10-installer shared/accepted-oracle-license-v1-1 select true \
-    | sudo /usr/bin/debconf-set-selections
-  
-  echo oracle-java10-installer shared/accepted-oracle-licence-v1-1 boolean true \
-    | sudo /usr/bin/debconf-set-selections
-}
 
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
