@@ -64,7 +64,10 @@ function install_from_zip() {
 
 print_header "Installing bins from ZIP (${#zip_names[@]})"
 
-for i in "${zip_urls[@]}"; do
+function __temp() { [[ ! -e "$1" ]]; }
+zip_i=($(array_filter_i zip_names __temp))
+
+for i in "${zip_i[@]}"; do
 
     zip_name="${zip_names[i]}"
     zip_url="${zip_urls[i]}"
