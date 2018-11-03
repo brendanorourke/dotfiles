@@ -19,10 +19,10 @@ zip_urls=()
 
 
 zip_names+=("ngrok")
-zip_urls+=("bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip")
+zip_urls+=("https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip")
 
 zip_names+=("exa-linux-x86_64")
-zip_urls+=("github.com/ogham/exa/releases/download/v0.8.0/exa-linux-x86_64-0.8.0.zip")
+zip_urls+=("https://github.com/ogham/exa/releases/download/v0.8.0/exa-linux-x86_64-0.8.0.zip")
 
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
