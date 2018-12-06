@@ -16,7 +16,7 @@ fi
 # Path Updates
 # ----------------
 
-export PYTHONPATH="${PYTHONPATH}:$HOME/dev/SE_tools"
+export PYTHONPATH="${PYTHONPATH}:$HOME/dev/sift/SE_tools"
 
 
 # ----------------
