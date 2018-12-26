@@ -1,7 +1,7 @@
 #
 # Directory helpers
 #
-alias cd="c"
+alias c="cdAndLs"
 alias lsgrep="lsAndGrep"
 alias mkdr="makeDirAndChange"
 
