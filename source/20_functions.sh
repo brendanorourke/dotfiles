@@ -11,5 +11,6 @@ function check_install() {
 }
 
 # Various convenience functions for navigation
+function cdLs()             { cd $1 && ls; }
 function makeDirAndChange() { mkdir $1 && cd $1; }
 function lsAndGrep()        { ls -lAh | grep $1; }
