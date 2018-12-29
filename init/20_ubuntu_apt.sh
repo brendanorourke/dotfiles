@@ -124,12 +124,15 @@ function install_apt_sources() {
 apt_packages+=(
   awscli
   build-essential
+  cmake
+  cmake-data
   curl
   docker.io
   docker-compose
   git-core
   gnome-tweak-tool
   htop
+  pkg-config
   postgresql
   python-pip
   thefuck
@@ -144,14 +147,30 @@ if is_ubuntu_desktop; then
     fonts-powerline
     gdebi-core
     jupyter-core
+    libasound2-dev
     libc++1
+    libcairo2-dev
+    libcurl4-openssl-dev
+    libmpdclient-dev
+    libn1-gen1-3-dev
+    libxcb1-dev
+    libxcb-composite0-dev
+    libxcb-cursor-dev
+    libxcb-ewmh-dev
+    libxcb-icccm4-dev
+    libxcb-image0-dev
+    libxcb-randr0-dev
+    libxcb-util0-dev
+    libxcb-xrm-dev
     network-manager-openvpn
     python-ipykernel
     python3
     python3-notebook
     python3-pip
+    python-xcbgen
     vim-gnome
     vlc
+    xcb-proto
   )
 
 fi
