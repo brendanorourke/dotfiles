@@ -144,6 +144,7 @@ if is_ubuntu_desktop; then
   apt_packages+=(
     default-jdk
     fonts-firacode
+    fonts-font-awesome
     fonts-powerline
     gdebi-core
     jupyter-core
