@@ -203,17 +203,19 @@ thermal-zone = 0
 hwmon-path = /sys/devices/platform/coretemp.0/hwmon/hwmon3/temp1_input
 warn-temperature = 80
 
-format = <label> <ramp>
-format-warn = <label-warn> <ramp>
+format = <ramp> <label>
+format-warn = <ramp> <label-warn>
 
-label = TEMP %temperature-c%
-label-warn = TEMP %temperature-c%
+label = %temperature-c%
+label-warn = %temperature-c%
 label-warn-foreground = #f00
 
-ramp-0 = A
-ramp-1 = B
-ramp-2 = C
-ramp-foreground = #55
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+ramp-3 = 
+ramp-4 = 
+ramp-foreground = #ccffffff
 
 [module/filesystem]
 type = internal/fs
@@ -229,8 +231,8 @@ format-mounted = <label-mounted>
 format-unmounted = <label-unmounted>
 format-padding = 5
 
-label-mounted = %mountpoint%: %percentage_used%% of %total%
-label-unmounted = %mountpoint%: not mounted
+label-mounted =  %mountpoint%: %percentage_used%% of %total%
+label-unmounted =  %mountpoint%: not mounted
 label-unmounted-foreground = #55
 
 ; vim:ft=dosini
