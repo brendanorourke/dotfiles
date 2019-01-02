@@ -1,5 +1,5 @@
 [bar/top]
-monitor = eDP-1
+monitor = ${env:POLY_MONITOR:eDP-1}
 width = 100%
 height = 28
 
@@ -19,7 +19,7 @@ font-2 = Termsynu:size=8:antialias=false;-2
 font-3 = FontAwesome:size=10;0
 
 modules-left = powermenu cpu memory temperature filesystem 
-modules-right = wireless-network battery date
+modules-right = wired-network wireless-network battery date
 
 [bar/bottom]
 monitor = eDP-1
@@ -142,8 +142,8 @@ interval = 3.0
 ping-interval = 10
 
 format-connected = <ramp-signal> <label-connected>
-label-connected = %essid% %{T3}%local_ip%%{T-}
-label-disconnected = not connected
+label-connected = %essid% (%local_ip%):  %upspeed%  %downspeed%
+label-disconnected = %ifname%: ! not connected
 label-disconnected-foreground = #66
 
 ramp-signal-0 = 0
@@ -151,6 +151,24 @@ ramp-signal-1 = 1
 ramp-signal-2 = 2
 ramp-signal-3 = 3
 ramp-signal-4 = 4
+
+animation-packetloss-0 = 
+animation-packetloss-0-foreground = #ffa64c
+animation-packetloss-1 = x
+animation-packetloss-1-foreground = ${bar/top.foreground}
+animation-packetloss-framerate = 500
+
+[module/wired-network]
+type = internal/network
+
+interface = enp0s31f6
+interval = 3.0
+ping-interval = 10
+
+format-connected = <label-connected>
+label-connected = %ifname% (%local_ip%):  %upspeed%  %downspeed%
+label-disconnected = %ifname%: ! not connected
+label-disconnected-foreground = #66
 
 animation-packetloss-0 = 
 animation-packetloss-0-foreground = #ffa64c
@@ -200,7 +218,7 @@ type = internal/temperature
 
 interval = 1
 thermal-zone = 0
-hwmon-path = /sys/devices/platform/coretemp.0/hwmon/hwmon3/temp1_input
+hwmon-path = /sys/devices/platform/coretemp.0/hwmon/hwmon1/temp1_input
 warn-temperature = 80
 
 format = <ramp> <label>
@@ -221,7 +239,7 @@ ramp-foreground = #ccffffff
 type = internal/fs
 
 mount-0 = /
-mount-1 = /boot
+mount-1 = /boot/efi
 
 fixed-values = false
 internval = 30
