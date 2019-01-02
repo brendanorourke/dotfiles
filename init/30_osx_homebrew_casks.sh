@@ -13,6 +13,7 @@ is_osx || return 1
 kegs=(
     caskroom/cask
     caskroom/fonts
+    homebrew/cask-fonts
 )
 
 casks=(
@@ -21,6 +22,7 @@ casks=(
     font-fire-code
     font-menlo-for-powerline
     font-meslo-for-powerline
+    font-source-code-pro
     hyper
     iterm2
     karabiner-elements
