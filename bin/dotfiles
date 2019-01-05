@@ -238,7 +238,7 @@ execute \
   "oh-my-zsh"
 
 execute \
-  "mv ~/.zshrc ~/.zshrc.backup-$(date +\"%Y%m%d-%H%M%S\") && mv ~/.zshrc.pre-oh-my-zsh ~/.zshrc" \
+  "[[ -f ~/.zshrc.pre-oh-my-zsh ]] && mv ~/.zshrc ~/.zshrc.backup-$(date +%Y%m%d-%H%M%S) && mv ~/.zshrc.pre-oh-my-zsh ~/.zshrc" \
   "restore .zshrc"
 
 execute \
