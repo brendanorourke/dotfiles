@@ -51,7 +51,9 @@ call vundle#rc()
 " }
 
 " UI Settings {
-  colors deus
+  if filereadable(expand("~/.vim/bundle/awesome-vim-colorschemes/colors/deus.vim"))
+    colors deus
+  endif
 
   " Transparent background
   hi Normal ctermbg=None
