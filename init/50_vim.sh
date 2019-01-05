@@ -22,7 +22,7 @@ if [[ "$(type -P vim)" ]]; then
     "download vundle"
   
   execute \
-    "vim +BundleInstall! +BundleClean +qall 2&> /dev/null" \
+    "vim +PluginInstall +qall 2&> /dev/null" \
     'install bundles'
 
 else
