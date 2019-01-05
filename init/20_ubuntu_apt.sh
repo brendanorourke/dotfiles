@@ -146,14 +146,18 @@ if is_ubuntu_desktop; then
     fonts-firacode
     fonts-font-awesome
     fonts-powerline
+    gconf2
+    gconf-service
     gdebi-core
     jupyter-core
+    libappindicator1
     libasound2-dev
     libc++1
     libcairo2-dev
     libcurl4-openssl-dev
+    libgconf-2-4
     libmpdclient-dev
-    libn1-gen1-3-dev
+    libnl-genl-3-dev
     libxcb1-dev
     libxcb-composite0-dev
     libxcb-cursor-dev
