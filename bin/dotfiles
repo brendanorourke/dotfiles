@@ -238,6 +238,10 @@ execute \
   "oh-my-zsh"
 
 execute \
+  "mv ~/.zshrc ~/.zshrc.backup-$(date +\"%Y%m%d-%H%M%S\") && mv ~/.zshrc.pre-oh-my-zsh ~/.zshrc" \
+  "restore .zshrc"
+
+execute \
   "cp $DOTFILES/external/themes/bullet-train.zsh-theme ~/.oh-my-zsh/themes/bullet-train.zsh-theme" \
   "zsh theme: bullet-train"
 
