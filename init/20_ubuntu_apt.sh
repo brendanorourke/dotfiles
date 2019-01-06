@@ -136,6 +136,7 @@ apt_packages+=(
   postgresql
   python-pip
   thefuck
+  tmux
   vim
 )
 
