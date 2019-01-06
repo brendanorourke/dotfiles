@@ -11,6 +11,7 @@ call vundle#rc()
   Plugin 'tomtom/tlib_vim'
 
   " General
+  Plugin 'christoomey/vim-tmux-navigator'
   Plugin 'godlygeek/tabular'
   Plugin 'jistr/vim-nerdtree-tabs'
   Plugin 'kien/ctrlp.vim'
