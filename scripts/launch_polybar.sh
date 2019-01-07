@@ -9,6 +9,6 @@ killall -q polybar
 while pgrep -u $UID polybar >/dev/null; do sleep 1; done
 
 # Launch top polybar
-POLY_MONITOR=$PRIMARY_MONITOR bash -c 'polybar top --config=$HOME/.polybar &'
+POLY_MONITOR=$PRIMARY_MONITOR bash -c 'polybar bottom --config=$HOME/.polybar &'
 
 echo "Polybar launched..."
