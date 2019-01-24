@@ -122,6 +122,7 @@ function install_apt_sources() {
 
 
 apt_packages+=(
+  # Global packages
   awscli
   build-essential
   cmake
@@ -138,49 +139,42 @@ apt_packages+=(
   thefuck
   tmux
   vim
+  # Desktop packages
+  default-jdk
+  fonts-firacode
+  fonts-font-awesome
+  fonts-powerline
+  gconf2
+  gconf-service
+  gdebi-core
+  jupyter-core
+  libappindicator1
+  libasound2-dev
+  libc++1
+  libcairo2-dev
+  libcurl4-openssl-dev
+  libgconf-2-4
+  libmpdclient-dev
+  libnl-genl-3-dev
+  libxcb1-dev
+  libxcb-composite0-dev
+  libxcb-cursor-dev
+  libxcb-ewmh-dev
+  libxcb-icccm4-dev
+  libxcb-image0-dev
+  libxcb-randr0-dev
+  libxcb-util0-dev
+  libxcb-xrm-dev
+  network-manager-openvpn
+  python-ipykernel
+  python3
+  python3-notebook
+  python3-pip
+  python-xcbgen
+  vim-gnome
+  vlc
+  xcb-proto
 )
-
-if is_ubuntu_desktop; then
-
-  apt_packages+=(
-    default-jdk
-    fonts-firacode
-    fonts-font-awesome
-    fonts-powerline
-    gconf2
-    gconf-service
-    gdebi-core
-    jupyter-core
-    libappindicator1
-    libasound2-dev
-    libc++1
-    libcairo2-dev
-    libcurl4-openssl-dev
-    libgconf-2-4
-    libmpdclient-dev
-    libnl-genl-3-dev
-    libxcb1-dev
-    libxcb-composite0-dev
-    libxcb-cursor-dev
-    libxcb-ewmh-dev
-    libxcb-icccm4-dev
-    libxcb-image0-dev
-    libxcb-randr0-dev
-    libxcb-util0-dev
-    libxcb-xrm-dev
-    network-manager-openvpn
-    python-ipykernel
-    python3
-    python3-notebook
-    python3-pip
-    python-xcbgen
-    vim-gnome
-    vlc
-    xcb-proto
-  )
-
-fi
-
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # INSTALL APT KEYS
