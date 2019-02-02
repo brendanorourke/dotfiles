@@ -120,6 +120,9 @@ function install_apt_sources() {
 # ADD PACKAGES
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+apt_source_files+=(
+  ppa:neovim-ppa/stable
+)
 
 apt_packages+=(
   # Global packages
@@ -150,6 +153,7 @@ apt_packages+=(
   libxcb-randr0-dev
   libxcb-util0-dev
   libxcb-xrm-dev
+  neovim
   nodejs
   npm
   pkg-config
