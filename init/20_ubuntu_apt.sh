@@ -131,23 +131,8 @@ apt_packages+=(
   docker.io
   docker-compose
   git-core
-  gnome-tweak-tool
+  golang-go
   htop
-  pkg-config
-  postgresql
-  python-pip
-  thefuck
-  tmux
-  vim
-  # Desktop packages
-  default-jdk
-  fonts-firacode
-  fonts-font-awesome
-  fonts-powerline
-  gconf2
-  gconf-service
-  gdebi-core
-  jupyter-core
   libappindicator1
   libasound2-dev
   libc++1
@@ -165,12 +150,31 @@ apt_packages+=(
   libxcb-randr0-dev
   libxcb-util0-dev
   libxcb-xrm-dev
-  network-manager-openvpn
+  nodejs
+  npm
+  pkg-config
+  postgresql
   python-ipykernel
+  python-pip
+  python-xcbgen
   python3
+  python3-dev
   python3-notebook
   python3-pip
-  python-xcbgen
+  thefuck
+  tmux
+  vim
+  # Desktop packages
+  default-jdk
+  fonts-firacode
+  fonts-font-awesome
+  fonts-powerline
+  gconf2
+  gconf-service
+  gdebi-core
+  gnome-tweak-tool
+  jupyter-core
+  network-manager-openvpn
   vim-gnome
   vlc
   xcb-proto
