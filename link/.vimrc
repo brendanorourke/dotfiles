@@ -50,10 +50,6 @@ call vundle#rc()
   set spell
   set virtualedit=onemore
   syntax on                      " Syntax highlighting
-  
-  {% if editor.name == "vim" %}
-        set term=xterm-256color
-  {% endif %}
 " }
 
 " UI Settings {
