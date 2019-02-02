@@ -20,6 +20,7 @@ call vundle#rc()
   Plugin 'Raimondi/delimitMate'
   Plugin 'scrooloose/nerdtree'
   Plugin 'scrooloose/syntastic'
+  Plugin 'Valloric/YouCompleteMe'
   Plugin 'vim-airline/vim-airline'
   Plugin 'vim-airline/vim-airline-themes'
 " }
@@ -102,4 +103,7 @@ call vundle#rc()
   map <C-n> :NERDTreeToggle<CR>
   let NERDTreeIgnore = ['\.pyc$']
   let g:NERDTreeNodeDelimiter = "\u00a0"
+
+  " YouCompleteMe
+  let g:ycm_autoclose_preview_window_after_insertion = 0
 " }
