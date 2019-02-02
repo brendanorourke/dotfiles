@@ -23,7 +23,11 @@ if [[ "$(type -P vim)" ]]; then
   
   execute \
     "vim +PluginInstall +qall 2&> /dev/null" \
-    'install bundles'
+    "install bundles"
+
+  execute \
+    "cd $BUNDLE_DIR/YouCompleteMe && python3 install.py --clang-completer --go-completer --java-completer --ts-completer" \
+    "compiling YouCompleteMe"
 
 else
 
