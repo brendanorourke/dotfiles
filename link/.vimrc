@@ -16,6 +16,7 @@ call vundle#rc()
   Plugin 'jistr/vim-nerdtree-tabs'
   Plugin 'kien/ctrlp.vim'
   Plugin 'myusuf3/numbers.vim'
+  Plugin 'posva/vim-vue'
   Plugin 'rafi/awesome-vim-colorschemes'
   Plugin 'Raimondi/delimitMate'
   Plugin 'scrooloose/nerdtree'
