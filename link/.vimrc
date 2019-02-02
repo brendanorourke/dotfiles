@@ -102,6 +102,7 @@ call vundle#rc()
   nnoremap <leader>d :NERDTreeTabsToggle<CR>
   map <C-n> :NERDTreeToggle<CR>
   let NERDTreeIgnore = ['\.pyc$']
+  let NERDTreeShowHidden = 1
   let g:NERDTreeNodeDelimiter = "\u00a0"
 
   " YouCompleteMe
