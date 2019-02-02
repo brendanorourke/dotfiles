@@ -48,9 +48,12 @@ call vundle#rc()
   set scrolloff=3                " Number of lines to keep around cursor
   set showmatch                  " Highlighting matching brackets
   set spell
-  set term=xterm-256color
   set virtualedit=onemore
   syntax on                      " Syntax highlighting
+  
+  {% if editor.name == "vim" %}
+        set term=xterm-256color
+  {% endif %}
 " }
 
 " UI Settings {
