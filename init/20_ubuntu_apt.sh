@@ -154,6 +154,7 @@ apt_packages+=(
   npm
   pkg-config
   postgresql
+  python-dev
   python-ipykernel
   python-pip
   python-xcbgen
@@ -161,6 +162,7 @@ apt_packages+=(
   python3-dev
   python3-notebook
   python3-pip
+  software-properties-common
   thefuck
   tmux
   vim
