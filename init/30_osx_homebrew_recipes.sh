@@ -16,6 +16,7 @@ recipes=(
     exa
     git
     git-extras
+    neovim
     postgresql
     reattach-to-user-namespace
     thefuck
