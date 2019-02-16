@@ -31,7 +31,7 @@ if [[ "$(type -P vim)" ]]; then
 
   execute \
     "nvim +UpdateRemotePlugins +qall 2&> /dev/null" \
-    "install nvim bundles"
+    "update remote nvim plugins"
 
 else
 
