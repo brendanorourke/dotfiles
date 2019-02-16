@@ -30,8 +30,8 @@ if [[ "$(type -P vim)" ]]; then
     "install nvim bundles"
 
   execute \
-    "cd $BUNDLE_DIR/YouCompleteMe && python3 install.py --clang-completer --go-completer --java-completer --ts-completer" \
-    "compiling YouCompleteMe"
+    "nvim +UpdateRemotePlugins +qall 2&> /dev/null" \
+    "update remote nvim plugins"
 
 else
 
