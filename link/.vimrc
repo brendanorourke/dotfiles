@@ -106,8 +106,6 @@ call vundle#rc()
   let NERDTreeShowHidden = 1
   let g:NERDTreeNodeDelimiter = "\u00a0"
 
-  " YouCompleteMe
-  let g:ycm_autoclose_preview_window_after_completion = 1
-  let g:ycm_autoclose_preview_window_after_insertion = 0
-  let g:ycm_key_list_stop_completion = ['<C-y>', '<CR>']
+  " deoplete
+  let g:deoplete#enable_at_startup = 1
 " }
