@@ -21,6 +21,7 @@ call vundle#rc()
   Plugin 'Raimondi/delimitMate'
   Plugin 'scrooloose/nerdtree'
   Plugin 'scrooloose/syntastic'
+  Plugin 'shougo/deoplete.nvim'
   Plugin 'vim-airline/vim-airline'
   Plugin 'vim-airline/vim-airline-themes'
   Plugin 'vim-python/python-syntax'
