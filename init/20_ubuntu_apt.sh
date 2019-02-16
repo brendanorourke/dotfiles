@@ -109,8 +109,6 @@ function install_apt_sources() {
 # ADD PACKAGES
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-add_ppa ppa:neovim-ppa/stable
-
 apt_packages+=(
   # Global packages
   awscli
