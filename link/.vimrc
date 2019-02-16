@@ -25,6 +25,11 @@ call vundle#rc()
   Plugin 'vim-airline/vim-airline'
   Plugin 'vim-airline/vim-airline-themes'
   Plugin 'vim-python/python-syntax'
+
+  if !has('nvim')
+    Plugin 'roxma/nvim-yarp'
+    Plugin 'roxma/vim-hug-neovim-rpc'
+  endif
 " }
 
 " General {
