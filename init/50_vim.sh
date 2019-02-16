@@ -29,6 +29,10 @@ if [[ "$(type -P vim)" ]]; then
     "nvim +PluginInstall +qall 2&> /dev/null" \
     "install nvim bundles"
 
+  execute \
+    "nvim +UpdateRemotePlugins +qall 2&> /dev/null" \
+    "install nvim bundles"
+
 else
 
   print_error "vim not installed"
