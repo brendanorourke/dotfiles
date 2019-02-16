@@ -34,7 +34,7 @@ function copy_test() {
 function copy_do() {
   
   execute \
-    "cp "$2" ~/" \
+    "cp --parents "$2" ~/" \
     "$1"
 
 }
