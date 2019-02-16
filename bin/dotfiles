@@ -34,7 +34,7 @@ function copy_test() {
 function copy_do() {
   
   execute \
-    "cp "$2" ~/" \
+    "cd $DOTFILES/copy/ && cp --parents "$2" ~/" \
     "$1"
 
 }
@@ -260,3 +260,4 @@ fi
 
 # Complete
 print_header "dotfiles execution complete!"
+
