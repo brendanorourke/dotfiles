@@ -113,7 +113,7 @@ function cmd_exists() {
 function do_stuff() {
   
   local base dest skip
-  local files=($(find $DOTFILES/$1 -type f | cut -sd / f 6- | sort))
+  local files=($(find $DOTFILES/$1 -type f | cut -sd / -f 6- | sort))
   
   [[ $(declare -f "$1_files") ]] && files=($("$1_files" "${files[@]}"))
   
