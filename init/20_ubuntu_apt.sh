@@ -120,9 +120,7 @@ function install_apt_sources() {
 # ADD PACKAGES
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-apt_source_files+=(
-  ppa:neovim-ppa/stable
-)
+add_ppa ppa:neovim-ppa/stable
 
 apt_packages+=(
   # Global packages
@@ -215,7 +213,7 @@ fi
 # INSTALL APT SOURCES
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-function __temp() { [[ -e /etc/apt/sources.list.d/$1.list ]]; }
+function __temp() { [[ ! -e /etc/apt/sources.list.d/$1.list ]]; }
 source_i=($(array_filter_i apt_source_files __temp))
 
 print_header "Adding APT sources (${#source_i[@]})"
