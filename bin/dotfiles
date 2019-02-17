@@ -33,8 +33,16 @@ function copy_test() {
 
 function copy_do() {
   
+  local copy_command
+
+  if is_osx; then
+    copy_command="ditto"
+  else
+    copy_command="cp --parents"
+  fi
+
   execute \
-    "cd $DOTFILES/copy/ && cp --parents "$2" ~/" \
+    "cd $DOTFILES/copy/ && $copy_command "$2" ~/" \
     "$1"
 
 }
