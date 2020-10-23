@@ -109,4 +109,7 @@ call vundle#rc()
   let NERDTreeIgnore = ['\.pyc$']
   let NERDTreeShowHidden = 1
   let g:NERDTreeNodeDelimiter = "\u00a0"
+
+  " Python paths
+  let g:python3_host_prog = '/usr/local/bin/python3'
 " }
