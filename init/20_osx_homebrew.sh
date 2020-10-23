@@ -7,7 +7,7 @@ print_header "Running homebrew health checks"
 if [[ ! "$(type -P brew)" ]]; then
   
   execute \
-    "true | ruby -e \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)\"" \
+    "true | /bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)\"" \
     "install homebrew"
 
 fi
