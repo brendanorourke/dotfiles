@@ -21,7 +21,6 @@ call vundle#rc()
   Plugin 'Raimondi/delimitMate'
   Plugin 'scrooloose/nerdtree'
   Plugin 'scrooloose/syntastic'
-  Plugin 'shougo/deoplete.nvim'
   Plugin 'vim-airline/vim-airline'
   Plugin 'vim-airline/vim-airline-themes'
   Plugin 'vim-python/python-syntax'
@@ -110,7 +109,4 @@ call vundle#rc()
   let NERDTreeIgnore = ['\.pyc$']
   let NERDTreeShowHidden = 1
   let g:NERDTreeNodeDelimiter = "\u00a0"
-
-  " deoplete
-  let g:deoplete#enable_at_startup = 1
 " }

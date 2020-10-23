@@ -9,3 +9,7 @@ if command -v exa >/dev/null 2>&1; then
     alias lt="exa -lRT --git"
     alias lta="exa -laRT --git"
 fi
+
+# Set default Python3 to the version managed by Homebrew
+# The macOS version of Python3 is totally broken
+alias python3=/usr/local/bin/python3
