@@ -19,3 +19,7 @@ alias tmk="tmux kill-session"
 
 # The fuck
 eval $(thefuck --alias)
+
+# Ask for ssh passphrase once
+alias ssha="eval $(ssh-agent) && ssh-add"
+
