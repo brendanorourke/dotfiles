@@ -11,22 +11,17 @@ is_osx || return 1
 
 
 kegs=(
-    caskroom/cask
-    caskroom/fonts
+    homebrew/cask
     homebrew/cask-fonts
 )
 
 casks=(
-    docker
-    firefox
-    font-fire-code
     font-menlo-for-powerline
     font-meslo-for-powerline
     font-source-code-pro
     hyper
     iterm2
     karabiner-elements
-    skype
     slack
     spotify
 )
@@ -79,7 +74,7 @@ function brew_install_casks() {
     for cask in "${casks[@]}"; do
   
       execute \
-        "brew cask install $cask &>/dev/null" \
+        "brew install $cask &>/dev/null" \
         "$cask"
 
     done
