@@ -74,7 +74,7 @@ function brew_install_casks() {
     for cask in "${casks[@]}"; do
   
       execute \
-        "brew cask install $cask &>/dev/null" \
+        "brew install $cask &>/dev/null" \
         "$cask"
 
     done
