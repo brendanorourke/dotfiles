@@ -11,8 +11,7 @@ is_osx || return 1
 
 
 kegs=(
-    caskroom/cask
-    caskroom/fonts
+    homebrew/cask
     homebrew/cask-fonts
 )
 
