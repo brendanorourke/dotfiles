@@ -17,16 +17,12 @@ kegs=(
 )
 
 casks=(
-    docker
-    firefox
-    font-fire-code
     font-menlo-for-powerline
     font-meslo-for-powerline
     font-source-code-pro
     hyper
     iterm2
     karabiner-elements
-    skype
     slack
     spotify
 )
