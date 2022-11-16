@@ -12,4 +12,4 @@ fi
 
 # Set default Python3 to the version managed by Homebrew
 # The macOS version of Python3 is totally broken
-alias python3=/usr/local/bin/python3
+alias python=/usr/bin/python3
