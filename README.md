@@ -7,6 +7,7 @@ The below must be pre-installed:
 1. [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 2. [Z-Shell](https://github.com/robbyrussell/oh-my-zsh/wiki/Installing-ZSH)
 3. [OSX CLT](http://railsapps.github.io/xcode-command-line-tools.html) (macOS only)
+4. [Homebrew](https://brew.sh/) (masOC only)
 
 ## Install
 Execute the below.
