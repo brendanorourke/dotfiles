@@ -14,6 +14,11 @@ BULLETTRAIN_TIME_FG="white"
 ZSH=~/.oh-my-zsh
 ZSH_THEME="bullet-train"
 
+# Temporary fix for git info issue with zsh-themes
+# NOTE: Must be included before oh-my-zsh is sourced.
+# https://github.com/caiogondim/bullet-train.zsh/issues/348
+zstyle ':omz:alpha:lib:git' async-prompt no
+
 source $ZSH/oh-my-zsh.sh
 
 # Load Node Version Manager
