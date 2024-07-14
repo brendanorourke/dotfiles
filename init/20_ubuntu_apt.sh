@@ -143,10 +143,7 @@ apt_packages+=(
   npm
   pkg-config
   postgresql
-  python-dev
-  python-ipykernel
   python-pip
-  python-xcbgen
   python3
   python3-dev
   python3-notebook
@@ -163,10 +160,8 @@ apt_packages+=(
   gconf2
   gconf-service
   gdebi-core
-  gnome-tweak-tool
   jupyter-core
   network-manager-openvpn
-  vim-gnome
   vlc
   xcb-proto
 )
