@@ -17,9 +17,6 @@ deb_sources+=("https://discordapp.com/api/download?platform=linux&format=deb")
 deb_installed+=(/usr/bin/hyper)
 deb_sources+=("https://github.com/zeit/hyper/releases/download/2.1.0/hyper_2.1.0_amd64.deb")
 
-deb_installed+=(/usr/bin/slack)
-deb_sources+=("https://downloads.slack-edge.com/linux_releases/slack-desktop-3.3.3-amd64.deb")
-
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # UTILITY FUNCTIONS
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
