@@ -149,7 +149,6 @@ apt_packages+=(
   python3-notebook
   python3-pip
   software-properties-common
-  thefuck
   tmux
   vim
   # Desktop packages

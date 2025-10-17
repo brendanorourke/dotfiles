@@ -19,7 +19,6 @@ recipes=(
     neovim
     postgresql
     reattach-to-user-namespace
-    thefuck
     tmux
     tmux-xpanes
     tree
