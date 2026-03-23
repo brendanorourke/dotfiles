@@ -4,6 +4,11 @@
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git)
 
+# Make locale explicit for terminal emulators.
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+export LC_CTYPE=en_US.UTF-8
+
 # User configuration
 DEFAULT_USER="$(id -un)"
 
@@ -13,6 +18,26 @@ BULLETTRAIN_TIME_BG="black"
 BULLETTRAIN_TIME_FG="white"
 ZSH=~/.oh-my-zsh
 ZSH_THEME="bullet-train"
+
+# Codex Desktop uses a different ANSI palette than the terminal theme this
+# prompt was tuned for, so darken a few segments only in Codex.
+if [[ -n "$CODEX_SHELL" ]]; then
+  BULLETTRAIN_TIME_BG=238
+  BULLETTRAIN_TIME_FG=255
+
+  BULLETTRAIN_DIR_BG=236
+  BULLETTRAIN_DIR_FG=255
+
+  BULLETTRAIN_GIT_BG=240
+  BULLETTRAIN_GIT_FG=255
+
+  BULLETTRAIN_STATUS_BG=70
+  BULLETTRAIN_STATUS_FG=16
+  BULLETTRAIN_STATUS_ERROR_BG=160
+
+  BULLETTRAIN_EXEC_TIME_BG=178
+  BULLETTRAIN_EXEC_TIME_FG=16
+fi
 
 # Temporary fix for git info issue with zsh-themes
 # NOTE: Must be included before oh-my-zsh is sourced.
